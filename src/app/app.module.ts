@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { TakeComponent } from './take/take.component';
 import { MakeComponent } from './make/make.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { QuestionsComponent } from './questions/questions.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
