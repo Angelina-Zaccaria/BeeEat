@@ -1,0 +1,56 @@
+<div class="main-content">
+    <!-- Add form group attribute -->
+    <!-- <form> -->
+    <div class="row header">
+        <div class="col-md-12">
+            <!-- Add form control name -->
+            <mat-form-field appearance="fill">
+                <input matInput placeholder="Add Title">
+            </mat-form-field>
+        </div>
+        <div class="col-md-12">
+            <!-- Add form control name -->
+            <mat-form-field appearance="fill">
+                <input matInput placeholder="Add Description">
+            </mat-form-field>
+        </div>
+    </div>
+    
+    
+    <div *ngIf="questions.length > 0; else noQuestions">
+        <div *ngFor="let question of questions; let i = index">
+            <div [ngSwitch]="question.type">
+                <div *ngSwitchCase="'True/False'">
+                    <strong>Question {{i + 1}}:</strong>
+                    <p>{{question.type}}</p>
+                    <!-- Create True/False fields (form tag not needed) -->
+                    <!-- Add form control names to each form-field -->
+                </div>
+                <div *ngSwitchCase="'Short Answer'">
+                    <strong>Question {{i + 1}}:</strong>
+                    <p>{{question.type}}</p>
+                    <!-- Create True/False fields (form tag not needed) -->
+                    <!-- Add form control names to each form-field -->
+                </div>
+                <div *ngSwitchCase="'Multiple Choice'">
+                    <strong>Question {{i + 1}}:</strong>
+                    <p>{{question.type}}</p>
+                    <!-- Create True/False fields (form tag not needed) -->
+                    <!-- Add form control names to each form-field -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #noQuestions>
+        <p>Add a question to get started...</p>
+    </ng-template>
+    
+    
+    <!-- </form> -->
+    
+    <button mat-raised-button (click)="addMultipleChoice()">Add Multiple Choice</button>
+    <button mat-raised-button (click)="addTrueFalse()">Add True/Flase</button>
+    <button mat-raised-button (click)="addShortAnswer()">Add Short Answer</button>
+    <!-- Add submit button -->
+
+</div>
