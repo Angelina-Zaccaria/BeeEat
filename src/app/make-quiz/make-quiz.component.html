@@ -62,7 +62,9 @@
                             <mat-form-field appearance="fill" class="points">
                                 <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
+                            <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
                         </div>
+                        <br>
                     </div>
                     
                     <div *ngSwitchCase="'True/False'">
@@ -82,9 +84,10 @@
                                 <mat-radio-button value = "false">False</mat-radio-button>
                             </mat-radio-group>
                         </div>
-                        <div class="col-md-12">
-                             <mat-form-field appearance="fill" class="points">
-                                <input matInput placeholder="Question point value" formControlName = "value">
+                        <div>
+                            Points: 
+                            <mat-form-field appearance="fill" class="points">
+                                <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
                         </div>
 
@@ -104,13 +107,14 @@
                             </mat-form-field>
                         </div>
                         <div>
-                            <mat-form-field appearance="fill" class="fill-in">
+                            <mat-form-field appearance="fill" class="input">
                                 <input matInput placeholder="Answer Goes Here..." formControlName = "answer">
                             </mat-form-field>
                         </div>
-                        <div class="col-md-12">
+                        <div>
+                            Points: 
                             <mat-form-field appearance="fill" class="points">
-                                <input matInput placeholder="Question point Value" formControlName = "value">
+                                <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
                         </div>
                     </div>
@@ -134,9 +138,10 @@
                                 </textarea>
                             </mat-form-field>
                         </div>
-                        <div class="col-md-12">
+                        <div>
+                            Points: 
                             <mat-form-field appearance="fill" class="points">
-                                <input matInput placeholder="Question point Value" formControlName = "value">
+                                <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
                         </div>
                     </div>
@@ -151,7 +156,7 @@
     <!-- </form> -->
     
     <button mat-raised-button (click)="addMultipleChoice()">Add Multiple Choice</button>
-    <button mat-raised-button (click)="addTrueFalse()">Add True/Flase</button>
+    <button mat-raised-button (click)="addTrueFalse()">Add True/False</button>
     <button mat-raised-button (click)="addShortAnswer()">Add Short Answer</button>
     <button mat-raised-button (click)="addEssay()">Add Essay</button>
     <!-- Add submit button -->

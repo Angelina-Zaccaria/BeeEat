@@ -16,7 +16,6 @@ export class MakeQuizComponent implements OnInit {
   quizForm: FormGroup;
   questionTypes: string[] = [];
 
-
   // why has nothing been done to the constructor
 
   constructor(private fb: FormBuilder) { 
@@ -101,6 +100,8 @@ export class MakeQuizComponent implements OnInit {
   //circle back to delete questions
   deleteQuestion(i){
     this.questionForms.removeAt(i)
+    delete this.questionTypes[i]
+    return i-1;
   }
 
   submit() {
