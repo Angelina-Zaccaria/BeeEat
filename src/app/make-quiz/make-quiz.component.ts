@@ -17,7 +17,7 @@ export class MakeQuizComponent implements OnInit {
   questionTypes: string[] = [];
 
 
-  // why has nothing breen done to the constructor
+  // why has nothing been done to the constructor
 
   constructor(private fb: FormBuilder) { 
 
@@ -82,6 +82,19 @@ export class MakeQuizComponent implements OnInit {
     })
     this.questionTypes.push('Short Answer')
     this.questionForms.push(shortAnswer)
+    // this.questions.push({ type: "Short Answer" });
+  }
+
+  addEssay() {
+    // TODO: create short answer form group 
+    // TODO: push form group to main quiz group field
+    const essay = this.fb.group({
+      question: '',
+      answer: '',
+      value: ''
+    })
+    this.questionTypes.push('Essay')
+    this.questionForms.push(essay)
     // this.questions.push({ type: "Short Answer" });
   }
 
