@@ -49,7 +49,8 @@ export class MakeQuizComponent implements OnInit {
       optionTwo: '',
       optionThree: '',
       optionFour: '',
-      answer: ''
+      answer: '',
+      value: ''
     })
 
     this.questionTypes.push('Multiple Choice')
@@ -57,13 +58,14 @@ export class MakeQuizComponent implements OnInit {
   }
 
   addTrueFalse() {
-    // TODO: create true/false form group 
+    // TODO: create true/false form group ng 
     // TODO: push form group to main quiz group field
     // this.questions.push({ type: "True/False" });
     const trueFalse = this.fb.group({
       question: '',
       // may want to change to boolean, may affect form validation (all filled out)
       answer: 'false',
+      value: ''
     })
     this.questionTypes.push('True/False')
     this.questionForms.push(trueFalse)
@@ -75,7 +77,8 @@ export class MakeQuizComponent implements OnInit {
     // TODO: push form group to main quiz group field
     const shortAnswer = this.fb.group({
       question: '',
-      answer: ''
+      answer: '',
+      value: ''
     })
     this.questionTypes.push('Short Answer')
     this.questionForms.push(shortAnswer)
