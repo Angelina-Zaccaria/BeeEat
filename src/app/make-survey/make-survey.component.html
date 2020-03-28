@@ -1,56 +1,153 @@
 <div class="main-content">
     <!-- Add form group attribute -->
     <!-- <form> -->
-    <div class="row header">
-        <div class="col-md-12">
-            <!-- Add form control name -->
-            <mat-form-field appearance="fill">
-                <input matInput placeholder="Add Title">
-            </mat-form-field>
+    <form [formGroup] = "surveyForm">
+        <div class="row header">
+            <div class="col-md-12">
+                <!-- Add form control name -->
+                <mat-form-field appearance="fill" class="input">
+                    <input matInput placeholder="Add Title" formControlName = "title">
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <!-- Add form control name -->
+                <mat-form-field appearance="fill" class="fill-in">
+                    <textarea matInput placeholder="Add Description" formControlName = "description"></textarea>
+                </mat-form-field>
+            </div>
         </div>
-        <div class="col-md-12">
-            <!-- Add form control name -->
-            <mat-form-field appearance="fill">
-                <input matInput placeholder="Add Description">
-            </mat-form-field>
-        </div>
-    </div>
     
-    
-    <div *ngIf="questions.length > 0; else noQuestions">
-        <div *ngFor="let question of questions; let i = index">
-            <div [ngSwitch]="question.type">
-                <div *ngSwitchCase="'True/False'">
-                    <strong>Question {{i + 1}}:</strong>
-                    <p>{{question.type}}</p>
-                    <!-- Create True/False fields (form tag not needed) -->
-                    <!-- Add form control names to each form-field -->
-                </div>
-                <div *ngSwitchCase="'Short Answer'">
-                    <strong>Question {{i + 1}}:</strong>
-                    <p>{{question.type}}</p>
-                    <!-- Create True/False fields (form tag not needed) -->
-                    <!-- Add form control names to each form-field -->
-                </div>
-                <div *ngSwitchCase="'Multiple Choice'">
-                    <strong>Question {{i + 1}}:</strong>
-                    <p>{{question.type}}</p>
-                    <!-- Create True/False fields (form tag not needed) -->
-                    <!-- Add form control names to each form-field -->
+        <div *ngIf="questionTypes.length > 0; else noQuestions" formArrayName = "questions">
+            <div *ngFor="let question of questionForms.controls; let i = index"
+                [formGroupName] = "i">
+                <!-- does it have to be question.type? -->
+                <div [ngSwitch]="questionTypes[i]">
+                    <!-- how does this switch case play into the type script? -->
+                    <div *ngSwitchCase="'Multiple Choice'">
+                        <strong>Question {{i + 1}}:</strong>
+                        <p>{{question.type}}</p>
+                        <!-- Create True/False fields (form tag not needed) -->
+                        <!-- Add form control names to each form-field -->
+                        <div>
+                            <mat-form-field appearance="fill" class="input">
+                                <input matInput placeholder="Write Question Here..." formControlName = "question">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-radio-group class="input">
+                                <mat-radio-button value = "1">
+                                    <mat-form-field appearance="fill">
+                                        <input matInput placeholder="Option One..." formControlName = "optionOne">
+                                    </mat-form-field>
+                                </mat-radio-button><br>
+                                <mat-radio-button value = "2">
+                                    <mat-form-field appearance="fill">
+                                        <input matInput placeholder="Option Two..." formControlName = "optionTwo">
+                                    </mat-form-field>
+                                </mat-radio-button><br>
+                                <mat-radio-button value = "3">
+                                    <mat-form-field appearance="fill">
+                                        <input matInput placeholder="Option Three..." formControlName = "optionThree">
+                                    </mat-form-field>
+                                </mat-radio-button><br>
+                                <mat-radio-button value = "4">
+                                    <mat-form-field appearance="fill">
+                                        <input matInput placeholder="Option Four..." formControlName = "optionFour">
+                                    </mat-form-field>
+                                </mat-radio-button><br>
+                            </mat-radio-group>
+                        </div>
+                        <div>
+                            <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
+                        </div>
+                        <br>
+                    </div>
+                    
+                    <div *ngSwitchCase="'True/False'">
+                        <strong>Question {{i + 1}}:</strong>
+                        <p>{{question.type}}</p>
+                        <!-- Create True/False fields (form tag not needed) -->
+                        <!-- Add form control names to each form-field -->
+                        <!-- input -->
+                        <div>
+                            <mat-form-field appearance="fill" class="input">
+                                <input matInput placeholder="Write Question Here..." formControlName = "question">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-radio-group>
+                                <mat-radio-button value = "true">True</mat-radio-button><br>
+                                <mat-radio-button value = "false">False</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div>
+                            <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
+                        </div>
+                        <br>
+                    </div>
+
+                    <div *ngSwitchCase="'Short Answer'" >
+                        <strong>Question {{i + 1}}:</strong>
+                        <p>{{question.type}}</p>
+                        <!-- Create True/False fields (form tag not needed) -->
+                        <!-- Add form control names to each form-field -->
+                        <!-- ^^that seems like an oxymoron -->
+                        <!-- input is probs wrong but what tag do i use? -->
+                        <!-- <input matInput placeholder = "Question" formControlName = "addShortAnswer"> -->
+                        <div>
+                            <mat-form-field appearance="fill" class="input">
+                                <input matInput placeholder="Write Question Here..." formControlName = "question">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="fill" class="input">
+                                <input disabled matInput placeholder="Response goes here...">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
+                        </div>
+                        <br>
+                    </div>
+
+                    <div *ngSwitchCase="'Essay'" >
+                        <strong>Question {{i + 1}}:</strong>
+                        <p>{{question.type}}</p>
+                        <!-- Create True/False fields (form tag not needed) -->
+                        <!-- Add form control names to each form-field -->
+                        <!-- ^^that seems like an oxymoron -->
+                        <!-- input is probs wrong but what tag do i use? -->
+                        <!-- <input matInput placeholder = "Question" formControlName = "addShortAnswer"> -->
+                        <div>
+                            <mat-form-field appearance="fill" class="input">
+                                <input matInput placeholder="Write Question Here..." formControlName = "question">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="fill" class="fill-in">
+                                <textarea disabled matInput placeholder="Response goes here...">
+                                </textarea>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
+                        </div>
+                        <br>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <ng-template #noQuestions>
-        <p>Add a question to get started...</p>
-    </ng-template>
+        <ng-template #noQuestions>
+            <p>Add a question to get started...</p>
+        </ng-template>
     
-    
+    </form>
     <!-- </form> -->
     
     <button mat-raised-button (click)="addMultipleChoice()">Add Multiple Choice</button>
-    <button mat-raised-button (click)="addTrueFalse()">Add True/Flase</button>
+    <button mat-raised-button (click)="addTrueFalse()">Add True/False</button>
     <button mat-raised-button (click)="addShortAnswer()">Add Short Answer</button>
+    <button mat-raised-button (click)="addEssay()">Add Essay</button>
     <!-- Add submit button -->
 
 </div>

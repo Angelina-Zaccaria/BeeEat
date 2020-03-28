@@ -100,8 +100,7 @@ export class MakeQuizComponent implements OnInit {
   //circle back to delete questions
   deleteQuestion(i){
     this.questionForms.removeAt(i)
-    delete this.questionTypes[i]
-    return i-1;
+    this.questionTypes.splice(i, 1)
   }
 
   submit() {
