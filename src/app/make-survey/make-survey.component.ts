@@ -15,6 +15,8 @@ export class MakeSurveyComponent implements OnInit {
   // questions: Question[] = [];
   surveyForm: FormGroup;
   questionTypes: string[] = [];
+  isPreviewing: boolean = false;
+  data: any;
 
   // why has nothing been done to the constructor
 
@@ -30,7 +32,7 @@ export class MakeSurveyComponent implements OnInit {
       //questions is a f
       questions: this.fb.array([])
     })
-    this.surveyForm.valueChanges.subscribe(console.log)
+    this.surveyForm.valueChanges.subscribe(data => this.data = data)
   }
 
   get questionForms() {
@@ -97,6 +99,10 @@ export class MakeSurveyComponent implements OnInit {
 
   submit() {
     // TODO
+  }
+
+  togglePreview() {
+    this.isPreviewing = !this.isPreviewing;
   }
 
 }
