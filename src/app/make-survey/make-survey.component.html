@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <!-- Add form control name -->
                 <mat-form-field appearance="fill" class="input">
-                    <input matInput placeholder="Add Title" formControlName = "title">
+                    <input type = "text" matInput placeholder="Add Title" formControlName = "title">
                 </mat-form-field>
             </div>
             <div class="col-md-12">
@@ -141,7 +141,7 @@
             <p>Add a question to get started...</p>
         </ng-template>
     
-    </form>
+    <!-- </form> -->
     <!-- </form> -->
     
     <button mat-raised-button (click)="addMultipleChoice()">Add Multiple Choice</button>
@@ -149,9 +149,19 @@
     <button mat-raised-button (click)="addShortAnswer()">Add Short Answer</button>
     <button mat-raised-button (click)="addEssay()">Add Essay</button><br>
     <br>
-    <a mat-raised-button (click)="togglePreview()" id="preview">Preview</a>
+    <div *ngIf="surveyForm.invalid">
+        <p> 
+            All fields must be filled out before you can preview!
+        </p>
+    </div> 
+    <div *ngIf="surveyForm.valid">
+            <p> 
+                You can now preview!
+            </p>
+        </div> 
+    <button mat-raised-button [disabled] = "surveyForm.invalid" (click)="togglePreview()" id="preview">Preview</button>
+    </form>
     <!-- Add submit button -->
-
 </div>
 <div *ngIf ="isPreviewing">
 <a mat-raised-button (click)="togglePreview()" id="preview">Edit</a>

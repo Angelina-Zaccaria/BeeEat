@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 interface Question {
   type: string;
@@ -27,8 +27,8 @@ export class MakeQuizComponent implements OnInit {
   // why are our functions outside the ngOnInit??
   ngOnInit(): void {
     this.quizForm = this.fb.group({
-      title: '',
-      description:'',
+      title: ['', Validators.required],
+      description:['', Validators.required],
       //questions is a f
       questions: this.fb.array([])
     })
@@ -40,18 +40,18 @@ export class MakeQuizComponent implements OnInit {
   }
 
   addMultipleChoice() {
-    // TODO: create multiple choice form group
-    // TODO: push form group to main quiz group field
-
     // this.questions.push({ type: "Multiple Choice" });
     const multipleChoice = this.fb.group({
-      question: '',
-      optionOne: '',
-      optionTwo: '',
-      optionThree: '',
-      optionFour: '',
-      answer: '',
-      value: ''
+      question: ['', Validators.required],
+      optionOne: ['', Validators.required],
+      optionTwo: ['', Validators.required],
+      optionThree: ['', Validators.required],
+      optionFour: ['', Validators.required],
+      answer: ['', Validators.required],
+      value: [null, [
+        Validators.required,
+        Validators.min(0)
+      ]]
     })
 
     this.questionTypes.push('Multiple Choice')
@@ -59,14 +59,15 @@ export class MakeQuizComponent implements OnInit {
   }
 
   addTrueFalse() {
-    // TODO: create true/false form group ng 
-    // TODO: push form group to main quiz group field
     // this.questions.push({ type: "True/False" });
     const trueFalse = this.fb.group({
-      question: '',
+      question: ['', Validators.required],
       // may want to change to boolean, may affect form validation (all filled out)
-      answer: 'false',
-      value: ''
+      answer: ['', Validators.required],
+      value: [null, [
+        Validators.required,
+        Validators.min(0)
+      ]]
     })
     this.questionTypes.push('True/False')
     this.questionForms.push(trueFalse)
@@ -74,12 +75,17 @@ export class MakeQuizComponent implements OnInit {
 
   
   addShortAnswer() {
-    // TODO: create short answer form group 
-    // TODO: push form group to main quiz group field
     const shortAnswer = this.fb.group({
-      question: '',
-      answer: '',
-      value: ''
+      question: ['', Validators.required],
+      answer: ['', [
+        Validators.required,
+        //character count
+        Validators.maxLength(100)
+      ]],
+      value: [' ', [
+        Validators.required,
+        Validators.min(0)
+      ]]
     })
     this.questionTypes.push('Short Answer')
     this.questionForms.push(shortAnswer)
@@ -87,19 +93,24 @@ export class MakeQuizComponent implements OnInit {
   }
 
   addEssay() {
-    // TODO: create short answer form group 
-    // TODO: push form group to main quiz group field
     const essay = this.fb.group({
-      question: '',
-      answer: '',
-      value: ''
+      question: ['', Validators.required],
+      answer: ['', [
+        Validators.required,
+        //character count
+        Validators.maxLength(500)
+      ]],
+      value: [null, [
+        Validators.required,
+        Validators.min(0)
+      ]]
     })
     this.questionTypes.push('Essay')
     this.questionForms.push(essay)
     // this.questions.push({ type: "Short Answer" });
   }
 
-  //circle back to delete questions
+
   deleteQuestion(i){
     this.questionForms.removeAt(i)
     this.questionTypes.splice(i, 1)

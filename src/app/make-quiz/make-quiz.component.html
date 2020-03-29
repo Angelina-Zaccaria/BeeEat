@@ -20,15 +20,12 @@
         <div *ngIf="questionTypes.length > 0; else noQuestions" formArrayName = "questions">
             <div *ngFor="let question of questionForms.controls; let i = index"
                 [formGroupName] = "i">
-                <!-- does it have to be question.type? -->
                 <div [ngSwitch]="questionTypes[i]">
-                    <!-- how does this switch case play into the type script? -->
+
                     <div *ngSwitchCase="'Multiple Choice'">
                         <strong>Question {{i + 1}}:</strong>
                         <p>{{question.type}}</p>
-                        <!-- Create True/False fields (form tag not needed) -->
-                        <!-- Add form control names to each form-field -->
-                        <div>
+                        <div> 
                             <mat-form-field appearance="fill" class="input">
                                 <input matInput placeholder="Write Question Here..." formControlName = "question">
                             </mat-form-field>
@@ -62,6 +59,9 @@
                             <mat-form-field appearance="fill" class="points">
                                 <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
+                            <span *ngIf="question.controls.value.errors?.min">
+                                The miniumum point value allowed is zero!
+                            </span>
                         </div>
                         <div>
                             <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
@@ -91,6 +91,9 @@
                             <mat-form-field appearance="fill" class="points">
                                 <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
+                            <span *ngIf="question.controls.value.errors?.min">
+                                The miniumum point value allowed is zero!
+                            </span>
                         </div>
                         <div>
                             <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
@@ -115,12 +118,18 @@
                             <mat-form-field appearance="fill" class="input">
                                 <input matInput placeholder="Answer Goes Here..." formControlName = "answer">
                             </mat-form-field>
+                            <span *ngIf="question.controls.answer.errors?.maxlength">
+                                    The maximum character limit is 100!
+                            </span>
                         </div>
                         <div>
                             Points: 
                             <mat-form-field appearance="fill" class="points">
                                 <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
+                            <span *ngIf="question.controls.value.errors?.min">
+                                The miniumum point value allowed is zero!
+                            </span>
                         </div>
                         <div>
                             <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
@@ -131,11 +140,6 @@
                     <div *ngSwitchCase="'Essay'" >
                         <strong>Question {{i + 1}}:</strong>
                         <p>{{question.type}}</p>
-                        <!-- Create True/False fields (form tag not needed) -->
-                        <!-- Add form control names to each form-field -->
-                        <!-- ^^that seems like an oxymoron -->
-                        <!-- input is probs wrong but what tag do i use? -->
-                        <!-- <input matInput placeholder = "Question" formControlName = "addShortAnswer"> -->
                         <div>
                             <mat-form-field appearance="fill" class="input">
                                 <input matInput placeholder="Write Question Here..." formControlName = "question">
@@ -146,12 +150,18 @@
                                 <textarea matInput placeholder="Answer Goes Here..." formControlName = "answer">
                                 </textarea>
                             </mat-form-field>
+                            <span *ngIf="question.controls.answer.errors?.maxlength">
+                                The maximum character limit is 500!
+                            </span>
                         </div>
                         <div>
                             Points: 
                             <mat-form-field appearance="fill" class="points">
                                 <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
+                            <span *ngIf="question.controls.value.errors?.min">
+                                The miniumum point value allowed is zero!
+                            </span>
                         </div>
                         <div>
                             <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
@@ -165,7 +175,6 @@
             <p>Add a question to get started...</p>
         </ng-template>
     
-    </form>
     <!-- </form> -->
     
     <button mat-raised-button (click)="addMultipleChoice()">Add Multiple Choice</button>
@@ -173,8 +182,18 @@
     <button mat-raised-button (click)="addShortAnswer()">Add Short Answer</button>
     <button mat-raised-button (click)="addEssay()">Add Essay</button><br>
     <br>
-    <a mat-raised-button (click)="togglePreview()" id="preview">Preview</a>
-    <!-- Add submit button -->
+    <div *ngIf="quizForm.invalid">
+            <p> 
+                All fields must be filled out before you can preview!
+            </p>
+        </div> 
+        <div *ngIf="quizForm.valid">
+                <p> 
+                    You can now preview!
+                </p>
+            </div> 
+        <button mat-raised-button [disabled] = "quizForm.invalid" (click)="togglePreview()" id="preview">Preview</button>
+</form>
 
 </div>
 <div *ngIf ="isPreviewing">

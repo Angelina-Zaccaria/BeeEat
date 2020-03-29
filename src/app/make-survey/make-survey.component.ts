@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 interface Question {
   type: string;
 }
 
-@Component({
+ @Component({
   selector: 'app-make-survey',
   templateUrl: './make-survey.component.html',
   styleUrls: ['./make-survey.component.scss']
@@ -27,8 +27,12 @@ export class MakeSurveyComponent implements OnInit {
   // why are our functions outside the ngOnInit??
   ngOnInit(): void {
     this.surveyForm = this.fb.group({
-      title: '',
-      description:'',
+      title: ['',
+        Validators.required
+      ],
+      description:['', [
+        Validators.required
+      ]],
       //questions is a f
       questions: this.fb.array([])
     })
@@ -45,11 +49,11 @@ export class MakeSurveyComponent implements OnInit {
 
     // this.questions.push({ type: "Multiple Choice" });
     const multipleChoice = this.fb.group({
-      question: '',
-      optionOne: '',
-      optionTwo: '',
-      optionThree: '',
-      optionFour: ''
+      question: ['', Validators.required],
+      optionOne: ['', Validators.required],
+      optionTwo: ['', Validators.required],
+      optionThree: ['', Validators.required],
+      optionFour: ['', Validators.required]
     })
 
     this.questionTypes.push('Multiple Choice')
@@ -61,7 +65,7 @@ export class MakeSurveyComponent implements OnInit {
     // TODO: push form group to main quiz group field
     // this.questions.push({ type: "True/False" });
     const trueFalse = this.fb.group({
-      question: ''
+      question: ['', Validators.required]
       // may want to change to boolean, may affect form validation (all filled out)
     })
     this.questionTypes.push('True/False')
@@ -73,7 +77,7 @@ export class MakeSurveyComponent implements OnInit {
     // TODO: create short answer form group 
     // TODO: push form group to main quiz group field
     const shortAnswer = this.fb.group({
-      question: ''
+      question: ['', Validators.required]
     })
     this.questionTypes.push('Short Answer')
     this.questionForms.push(shortAnswer)
@@ -84,7 +88,7 @@ export class MakeSurveyComponent implements OnInit {
     // TODO: create short answer form group 
     // TODO: push form group to main quiz group field
     const essay = this.fb.group({
-      question: ''
+      question: ['', Validators.required]
     })
     this.questionTypes.push('Essay')
     this.questionForms.push(essay)
