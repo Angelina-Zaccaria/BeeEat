@@ -12,6 +12,7 @@ import { QuestionsComponent } from './questions/questions.component';
 import { MaterialModule } from './material/material.module';
 import { MakeQuizComponent } from './make-quiz/make-quiz.component';
 import { MakeSurveyComponent } from './make-survey/make-survey.component';
+import { PreviewComponent } from './preview/preview.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MakeSurveyComponent } from './make-survey/make-survey.component';
     MakeComponent,
     QuestionsComponent,
     MakeQuizComponent,
-    MakeSurveyComponent
+    MakeSurveyComponent,
+    PreviewComponent
   ],
   imports: [
     BrowserModule,
