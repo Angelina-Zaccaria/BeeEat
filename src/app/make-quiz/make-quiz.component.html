@@ -197,7 +197,9 @@
 
 </div>
 <div *ngIf ="isPreviewing">
-    <a mat-raised-button (click)="togglePreview()" id="preview">Edit</a>
+        <button mat-raised-button (click)="togglePreview()" id="preview">Edit</button>
+        <!-- dummy submit variable -->
+        <button mat-raised-button [routerLink]="['']" id="preview">Submit</button>
     <h1>{{data.title}}</h1>
     <h2>{{data.description}}</h2>
     <div *ngFor="let question of data.questions; let i = index">
