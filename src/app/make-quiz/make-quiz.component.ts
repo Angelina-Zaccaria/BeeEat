@@ -15,6 +15,8 @@ export class MakeQuizComponent implements OnInit {
   // questions: Question[] = [];
   quizForm: FormGroup;
   questionTypes: string[] = [];
+  isPreviewing: boolean = false;
+  data: any;
 
   // why has nothing been done to the constructor
 
@@ -30,7 +32,7 @@ export class MakeQuizComponent implements OnInit {
       //questions is a f
       questions: this.fb.array([])
     })
-    this.quizForm.valueChanges.subscribe(console.log)
+    this.quizForm.valueChanges.subscribe(data => this.data = data)
   }
 
   get questionForms() {
@@ -105,6 +107,10 @@ export class MakeQuizComponent implements OnInit {
 
   submit() {
     // TODO
+  }
+
+  togglePreview() {
+    this.isPreviewing = !this.isPreviewing;
   }
 
 }
