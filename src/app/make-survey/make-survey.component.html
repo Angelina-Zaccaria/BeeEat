@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content" *ngIf = "!isPreviewing">
     <!-- Add form group attribute -->
     <!-- <form> -->
     <form [formGroup] = "surveyForm">
@@ -35,22 +35,22 @@
                         </div>
                         <div>
                             <mat-radio-group class="input">
-                                <mat-radio-button value = "1">
+                                <mat-radio-button disabled value = "1">
                                     <mat-form-field appearance="fill">
                                         <input matInput placeholder="Option One..." formControlName = "optionOne">
                                     </mat-form-field>
                                 </mat-radio-button><br>
-                                <mat-radio-button value = "2">
+                                <mat-radio-button disabled value = "2">
                                     <mat-form-field appearance="fill">
                                         <input matInput placeholder="Option Two..." formControlName = "optionTwo">
                                     </mat-form-field>
                                 </mat-radio-button><br>
-                                <mat-radio-button value = "3">
+                                <mat-radio-button disabled value = "3">
                                     <mat-form-field appearance="fill">
                                         <input matInput placeholder="Option Three..." formControlName = "optionThree">
                                     </mat-form-field>
                                 </mat-radio-button><br>
-                                <mat-radio-button value = "4">
+                                <mat-radio-button disabled value = "4">
                                     <mat-form-field appearance="fill">
                                         <input matInput placeholder="Option Four..." formControlName = "optionFour">
                                     </mat-form-field>
@@ -76,8 +76,8 @@
                         </div>
                         <div>
                             <mat-radio-group>
-                                <mat-radio-button value = "true">True</mat-radio-button><br>
-                                <mat-radio-button value = "false">False</mat-radio-button>
+                                <mat-radio-button disabled value = "true">True</mat-radio-button><br>
+                                <mat-radio-button disabled value = "false">False</mat-radio-button>
                             </mat-radio-group>
                         </div>
                         <div>
@@ -149,7 +149,61 @@
     <button mat-raised-button (click)="addShortAnswer()">Add Short Answer</button>
     <button mat-raised-button (click)="addEssay()">Add Essay</button><br>
     <br>
-    <a mat-raised-button [routerLink]="['preview']" id="preview">Preview</a>
+    <a mat-raised-button (click)="togglePreview()" id="preview">Preview</a>
     <!-- Add submit button -->
 
+</div>
+<div *ngIf ="isPreviewing">
+<a mat-raised-button (click)="togglePreview()" id="preview">Edit</a>
+<h1>{{data.title}}</h1>
+<h2>{{data.description}}</h2>
+<div *ngFor="let question of data.questions; let i = index">
+    <div [ngSwitch] = "questionTypes[i]">
+        <div *ngSwitchCase = "'Multiple Choice'">
+            <strong>{{i + 1}}. {{question.question}}</strong>
+            <div>
+                <mat-radio-group value = question.answer>
+                    <mat-radio-button value = "1">
+                        {{question.optionOne}}
+                    </mat-radio-button><br>
+                    <mat-radio-button value = "2">
+                        {{question.optionTwo}}
+                    </mat-radio-button><br>
+                    <mat-radio-button value = "3">
+                        {{question.optionThree}}
+                    </mat-radio-button><br>
+                    <mat-radio-button value = "4">
+                        {{question.optionFour}}
+                    </mat-radio-button><br>
+                </mat-radio-group>
+            </div>
+        </div>
+        <div *ngSwitchCase = "'True/False'">
+            <strong>{{i + 1}}. {{question.question}}</strong>
+            <div>
+                <mat-radio-group value = question.answer>
+                    <mat-radio-button value = "true">True</mat-radio-button><br>
+                    <mat-radio-button value = "false">False</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <div *ngSwitchCase = "'Short Answer'">
+            <strong>{{i + 1}}. {{question.question}}</strong>
+            <div>
+                <mat-form-field appearance="fill" class="input">
+                    <input matInput placeholder="Answer Goes Here...">
+                </mat-form-field>
+            </div>
+        </div>
+        <div *ngSwitchCase = "'Essay'">
+            <strong>{{i + 1}}. {{question.question}}</strong>
+            <div>
+                <mat-form-field appearance="fill" class="fill-in">
+                    <textarea matInput placeholder="Answer Goes Here...">
+                    </textarea>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
