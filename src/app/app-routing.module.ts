@@ -4,12 +4,21 @@ import { HomeComponent } from './home/home.component';
 import { TakeComponent } from './take/take.component';
 import { MakeComponent } from './make/make.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { PreviewComponent } from './preview/preview.component';
+import { MakeQuizComponent } from './make-quiz/make-quiz.component';
+import { MakeSurveyComponent } from './make-survey/make-survey.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'take', component: TakeComponent },
-  { path: 'make', component: MakeComponent } 
+  { path: 'make', component: MakeComponent },
+  { path: 'preview', component: PreviewComponent,
+    children:  [
+      { path: '', component: MakeQuizComponent },
+      { path: '', component: MakeSurveyComponent },
+    ]
+  }
 ]; 
 
 @NgModule({
