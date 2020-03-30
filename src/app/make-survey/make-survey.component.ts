@@ -27,13 +27,9 @@ export class MakeSurveyComponent implements OnInit {
   // why are our functions outside the ngOnInit??
   ngOnInit(): void {
     this.surveyForm = this.fb.group({
-      title: ['',
-        Validators.required
-      ],
-      description:['', [
-        Validators.required
-      ]],
-      //questions is a f
+      title: ['', Validators.required],
+      description: '',
+      //questions is a form array
       questions: this.fb.array([])
     })
     this.surveyForm.valueChanges.subscribe(data => this.data = data)
@@ -44,9 +40,6 @@ export class MakeSurveyComponent implements OnInit {
   }
 
   addMultipleChoice() {
-    // TODO: create multiple choice form group
-    // TODO: push form group to main quiz group field
-
     // this.questions.push({ type: "Multiple Choice" });
     const multipleChoice = this.fb.group({
       question: ['', Validators.required],
@@ -61,12 +54,9 @@ export class MakeSurveyComponent implements OnInit {
   }
 
   addTrueFalse() {
-    // TODO: create true/false form group ng 
-    // TODO: push form group to main quiz group field
     // this.questions.push({ type: "True/False" });
     const trueFalse = this.fb.group({
       question: ['', Validators.required]
-      // may want to change to boolean, may affect form validation (all filled out)
     })
     this.questionTypes.push('True/False')
     this.questionForms.push(trueFalse)
@@ -74,8 +64,6 @@ export class MakeSurveyComponent implements OnInit {
 
   
   addShortAnswer() {
-    // TODO: create short answer form group 
-    // TODO: push form group to main quiz group field
     const shortAnswer = this.fb.group({
       question: ['', Validators.required]
     })
@@ -85,8 +73,6 @@ export class MakeSurveyComponent implements OnInit {
   }
 
   addEssay() {
-    // TODO: create short answer form group 
-    // TODO: push form group to main quiz group field
     const essay = this.fb.group({
       question: ['', Validators.required]
     })
@@ -95,7 +81,6 @@ export class MakeSurveyComponent implements OnInit {
     // this.questions.push({ type: "Short Answer" });
   }
 
-  //circle back to delete questions
   deleteQuestion(i){
     this.questionForms.removeAt(i)
     this.questionTypes.splice(i, 1)

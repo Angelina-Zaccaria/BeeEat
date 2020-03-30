@@ -1,16 +1,12 @@
 <div class="main-content" *ngIf = "!isPreviewing">
-    <!-- Add form group attribute -->
-    <!-- <form> -->
     <form [formGroup] = "surveyForm">
         <div class="row header">
             <div class="col-md-12">
-                <!-- Add form control name -->
                 <mat-form-field appearance="fill" class="input">
                     <input type = "text" matInput placeholder="Add Title" formControlName = "title">
                 </mat-form-field>
             </div>
             <div class="col-md-12">
-                <!-- Add form control name -->
                 <mat-form-field appearance="fill" class="fill-in">
                     <textarea matInput placeholder="Add Description" formControlName = "description"></textarea>
                 </mat-form-field>
@@ -20,14 +16,10 @@
         <div *ngIf="questionTypes.length > 0; else noQuestions" formArrayName = "questions">
             <div *ngFor="let question of questionForms.controls; let i = index"
                 [formGroupName] = "i">
-                <!-- does it have to be question.type? -->
                 <div [ngSwitch]="questionTypes[i]">
-                    <!-- how does this switch case play into the type script? -->
                     <div *ngSwitchCase="'Multiple Choice'">
                         <strong>Question {{i + 1}}:</strong>
                         <p>{{question.type}}</p>
-                        <!-- Create True/False fields (form tag not needed) -->
-                        <!-- Add form control names to each form-field -->
                         <div>
                             <mat-form-field appearance="fill" class="input">
                                 <input matInput placeholder="Write Question Here..." formControlName = "question">
@@ -66,9 +58,6 @@
                     <div *ngSwitchCase="'True/False'">
                         <strong>Question {{i + 1}}:</strong>
                         <p>{{question.type}}</p>
-                        <!-- Create True/False fields (form tag not needed) -->
-                        <!-- Add form control names to each form-field -->
-                        <!-- input -->
                         <div>
                             <mat-form-field appearance="fill" class="input">
                                 <input matInput placeholder="Write Question Here..." formControlName = "question">
@@ -89,11 +78,6 @@
                     <div *ngSwitchCase="'Short Answer'" >
                         <strong>Question {{i + 1}}:</strong>
                         <p>{{question.type}}</p>
-                        <!-- Create True/False fields (form tag not needed) -->
-                        <!-- Add form control names to each form-field -->
-                        <!-- ^^that seems like an oxymoron -->
-                        <!-- input is probs wrong but what tag do i use? -->
-                        <!-- <input matInput placeholder = "Question" formControlName = "addShortAnswer"> -->
                         <div>
                             <mat-form-field appearance="fill" class="input">
                                 <input matInput placeholder="Write Question Here..." formControlName = "question">
@@ -113,11 +97,6 @@
                     <div *ngSwitchCase="'Essay'" >
                         <strong>Question {{i + 1}}:</strong>
                         <p>{{question.type}}</p>
-                        <!-- Create True/False fields (form tag not needed) -->
-                        <!-- Add form control names to each form-field -->
-                        <!-- ^^that seems like an oxymoron -->
-                        <!-- input is probs wrong but what tag do i use? -->
-                        <!-- <input matInput placeholder = "Question" formControlName = "addShortAnswer"> -->
                         <div>
                             <mat-form-field appearance="fill" class="input">
                                 <input matInput placeholder="Write Question Here..." formControlName = "question">
@@ -151,7 +130,7 @@
     <br>
     <div *ngIf="surveyForm.invalid">
         <p> 
-            All fields must be filled out before you can preview!
+            All fields must be filled out correctly before you can preview!
         </p>
     </div> 
     <div *ngIf="surveyForm.valid">
