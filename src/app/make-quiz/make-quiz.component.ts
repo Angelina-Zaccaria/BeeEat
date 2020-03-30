@@ -18,18 +18,16 @@ export class MakeQuizComponent implements OnInit {
   isPreviewing: boolean = false;
   data: any;
 
-  // why has nothing been done to the constructor
 
   constructor(private fb: FormBuilder) { 
 
   }
 
-  // why are our functions outside the ngOnInit??
   ngOnInit(): void {
     this.quizForm = this.fb.group({
       title: ['', Validators.required],
-      description:['', Validators.required],
-      //questions is a f
+      description: '',
+      //questions is a form array
       questions: this.fb.array([])
     })
     this.quizForm.valueChanges.subscribe(data => this.data = data)
@@ -50,7 +48,8 @@ export class MakeQuizComponent implements OnInit {
       answer: ['', Validators.required],
       value: [null, [
         Validators.required,
-        Validators.min(0)
+        Validators.min(0),
+        Validators.pattern('[0-9]*')
       ]]
     })
 
@@ -66,7 +65,8 @@ export class MakeQuizComponent implements OnInit {
       answer: ['', Validators.required],
       value: [null, [
         Validators.required,
-        Validators.min(0)
+        Validators.min(0),
+        Validators.pattern('[0-9]*')
       ]]
     })
     this.questionTypes.push('True/False')
@@ -82,9 +82,10 @@ export class MakeQuizComponent implements OnInit {
         //character count
         Validators.maxLength(100)
       ]],
-      value: [' ', [
+      value: [null, [
         Validators.required,
-        Validators.min(0)
+        Validators.min(0),
+        Validators.pattern('[0-9]*')
       ]]
     })
     this.questionTypes.push('Short Answer')
@@ -102,7 +103,8 @@ export class MakeQuizComponent implements OnInit {
       ]],
       value: [null, [
         Validators.required,
-        Validators.min(0)
+        Validators.min(0),
+        Validators.pattern('[0-9]*')
       ]]
     })
     this.questionTypes.push('Essay')

@@ -1,16 +1,12 @@
 <div class="main-content" *ngIf = "!isPreviewing">
-    <!-- Add form group attribute -->
-    <!-- <form> -->
     <form [formGroup] = "quizForm">
         <div class="row header">
             <div class="col-md-12">
-                <!-- Add form control name -->
                 <mat-form-field appearance="fill" class="input">
                     <input matInput placeholder="Add Title" formControlName = "title">
                 </mat-form-field>
             </div>
             <div class="col-md-12">
-                <!-- Add form control name -->
                 <mat-form-field appearance="fill" class="fill-in">
                     <textarea matInput placeholder="Add Description" formControlName = "description"></textarea>
                 </mat-form-field>
@@ -59,8 +55,8 @@
                             <mat-form-field appearance="fill" class="points">
                                 <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
-                            <span *ngIf="question.controls.value.errors?.min">
-                                The miniumum point value allowed is zero!
+                            <span *ngIf="question.controls.value.errors?.pattern">
+                                Only positive whole numbers accepted!
                             </span>
                         </div>
                         <div>
@@ -72,9 +68,6 @@
                     <div *ngSwitchCase="'True/False'">
                         <strong>Question {{i + 1}}:</strong>
                         <p>{{question.type}}</p>
-                        <!-- Create True/False fields (form tag not needed) -->
-                        <!-- Add form control names to each form-field -->
-                        <!-- input -->
                         <div>
                             <mat-form-field appearance="fill" class="input">
                                 <input matInput placeholder="Write Question Here..." formControlName = "question">
@@ -91,8 +84,8 @@
                             <mat-form-field appearance="fill" class="points">
                                 <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
-                            <span *ngIf="question.controls.value.errors?.min">
-                                The miniumum point value allowed is zero!
+                            <span *ngIf="question.controls.value.errors?.pattern">
+                                Only positive whole numbers accepted!
                             </span>
                         </div>
                         <div>
@@ -104,11 +97,6 @@
                     <div *ngSwitchCase="'Short Answer'" >
                         <strong>Question {{i + 1}}:</strong>
                         <p>{{question.type}}</p>
-                        <!-- Create True/False fields (form tag not needed) -->
-                        <!-- Add form control names to each form-field -->
-                        <!-- ^^that seems like an oxymoron -->
-                        <!-- input is probs wrong but what tag do i use? -->
-                        <!-- <input matInput placeholder = "Question" formControlName = "addShortAnswer"> -->
                         <div>
                             <mat-form-field appearance="fill" class="input">
                                 <input matInput placeholder="Write Question Here..." formControlName = "question">
@@ -127,8 +115,8 @@
                             <mat-form-field appearance="fill" class="points">
                                 <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
-                            <span *ngIf="question.controls.value.errors?.min">
-                                The miniumum point value allowed is zero!
+                            <span *ngIf="question.controls.value.errors?.pattern">
+                                Only positive whole numbers accepted!
                             </span>
                         </div>
                         <div>
@@ -159,8 +147,8 @@
                             <mat-form-field appearance="fill" class="points">
                                 <input matInput placeholder="" formControlName = "value">
                             </mat-form-field>
-                            <span *ngIf="question.controls.value.errors?.min">
-                                The miniumum point value allowed is zero!
+                            <span *ngIf="question.controls.value.errors?.pattern">
+                                    Only positive whole numbers accepted!
                             </span>
                         </div>
                         <div>
@@ -175,7 +163,6 @@
             <p>Add a question to get started...</p>
         </ng-template>
     
-    <!-- </form> -->
     
     <button mat-raised-button (click)="addMultipleChoice()">Add Multiple Choice</button>
     <button mat-raised-button (click)="addTrueFalse()">Add True/False</button>
@@ -184,7 +171,7 @@
     <br>
     <div *ngIf="quizForm.invalid">
             <p> 
-                All fields must be filled out before you can preview!
+                All fields must be filled out correctly before you can preview!
             </p>
         </div> 
         <div *ngIf="quizForm.valid">
@@ -236,7 +223,7 @@
                 <strong>{{i + 1}}. {{question.question}}</strong>
                 <div>
                     <mat-form-field appearance="fill" class="input">
-                        <input matInput placeholder="Answer Goes Here...">
+                        <input matInput type="number" placeholder="Answer Goes Here...">
                     </mat-form-field>
                 </div>
             </div>
