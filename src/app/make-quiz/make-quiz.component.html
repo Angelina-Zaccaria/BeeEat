@@ -187,8 +187,8 @@
         <button mat-raised-button (click)="togglePreview()" id="preview">Edit</button>
         <!-- dummy submit variable -->
         <button mat-raised-button [routerLink]="['']" id="preview">Submit</button>
-    <h1>{{data.title}}</h1>
-    <h2>{{data.description}}</h2>
+    <h1><br>{{data.title}}</h1>
+    <h4>{{data.description}}</h4>
     <div *ngFor="let question of data.questions; let i = index">
         <div [ngSwitch] = "questionTypes[i]">
             <div *ngSwitchCase = "'Multiple Choice'">
@@ -223,7 +223,7 @@
                 <strong>{{i + 1}}. {{question.question}}</strong>
                 <div>
                     <mat-form-field appearance="fill" class="input">
-                        <input matInput type="number" placeholder="Answer Goes Here...">
+                        <input matInput placeholder="Answer Goes Here...">
                     </mat-form-field>
                 </div>
             </div>
