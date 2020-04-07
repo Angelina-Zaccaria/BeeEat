@@ -17,7 +17,7 @@
             <div *ngFor="let question of questionForms.controls; let i = index"
                 [formGroupName] = "i">
                 <div [ngSwitch]="questionTypes[i]">
-
+                    <!-- start listing types of questions -->
                     <div *ngSwitchCase="'Multiple Choice'">
                         <strong>Question {{i + 1}}:</strong>
                         <p>{{question.type}}</p>
@@ -156,6 +156,46 @@
                         </div>
                         <br>
                     </div>
+
+                    <div *ngSwitchCase="'Ranking'" >
+                        <strong>Question {{i + 1}}:</strong>
+                        <p>{{question.type}}</p>
+                        <div>
+                            <mat-form-field appearance="fill" class="input">
+                                <input matInput placeholder="Write Question Here..." formControlName = "question">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <!-- <mat-form-field appearance="fill" class="fill-in">
+                                <textarea matInput placeholder="Answer Goes Here..." formControlName = "answer">
+                                </textarea>
+                            </mat-form-field> -->
+                            <!-- <span *ngIf="question.controls.answer.errors?.maxlength">
+                                The maximum character limit is 500!
+                            </span> -->
+                            <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event, i)">
+                            <div *ngFor="let item of question.get('options').controls" [formGroup] = "item" cdkDrag>
+                                <!-- <span cdkDragHandle>drag</span> -->
+                                <mat-form-field appearance="fill" class="input">
+                                <input matInput placeholder="Option..." formControlName="option">
+                                </mat-form-field>
+                            </div>
+                            </div>
+                        </div>
+                        <div>
+                            Points: 
+                            <mat-form-field appearance="fill" class="points">
+                                <input matInput placeholder="" formControlName = "value">
+                            </mat-form-field>
+                            <span *ngIf="question.controls.value.errors?.pattern">
+                                    Only positive whole numbers accepted!
+                            </span>
+                        </div>
+                        <div>
+                            <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
+                        </div>
+                        <br>
+                    </div>
                 </div>
             </div>
         </div>
@@ -168,6 +208,7 @@
     <button mat-raised-button (click)="addTrueFalse()">Add True/False</button>
     <button mat-raised-button (click)="addShortAnswer()">Add Short Answer</button>
     <button mat-raised-button (click)="addEssay()">Add Essay</button><br>
+    <button mat-raised-button (click)="addRanking()">Add Ranking</button><br>
     <br>
     <div *ngIf="quizForm.invalid">
             <p> 

@@ -8,6 +8,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTabsModule,
     MatInputModule,
     MatCardModule,
-    MatRadioModule
+    MatRadioModule,
+    DragDropModule
   ],
   exports: [
     MatButtonModule,
@@ -29,7 +31,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTabsModule,
     MatInputModule,
     MatCardModule,
-    MatRadioModule
+    MatRadioModule, 
+    DragDropModule
   ]
 })
 export class MaterialModule { }

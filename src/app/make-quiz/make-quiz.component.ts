@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 interface Question {
   type: string;
 }
+
 
 @Component({
   selector: 'app-make-quiz',
@@ -31,7 +33,9 @@ export class MakeQuizComponent implements OnInit {
       questions: this.fb.array([])
     })
     this.quizForm.valueChanges.subscribe(data => this.data = data)
+    this.quizForm.valueChanges.subscribe(console.log)
   }
+
 
   get questionForms() {
     return this.quizForm.get('questions') as FormArray
@@ -110,6 +114,39 @@ export class MakeQuizComponent implements OnInit {
     this.questionTypes.push('Essay')
     this.questionForms.push(essay)
     // this.questions.push({ type: "Short Answer" });
+  }
+
+  addRanking() {
+    const ranking = this.fb.group({
+      question: ['', Validators.required], 
+      options: this.fb.array([
+        this.fb.group({
+          option: this.fb.control(''),
+        }),
+        this.fb.group({
+          option: this.fb.control(''),
+        }),
+        this.fb.group({
+          option: this.fb.control(''),
+        }),
+        this.fb.group({
+          option: this.fb.control(''),
+        })          
+      ]),
+      value: [null, [
+        Validators.required,
+        Validators.min(0),
+        Validators.pattern('[0-9]*')
+      ]]
+    })
+    this.questionTypes.push('Ranking')
+    this.questionForms.push(ranking)
+
+  }
+
+  drop(event: CdkDragDrop<string[]>, i) {
+    moveItemInArray(this.questionForms.get(i).get('options').controls, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.questionForms.get(i).get('options').value, event.previousIndex, event.currentIndex);
   }
 
 
