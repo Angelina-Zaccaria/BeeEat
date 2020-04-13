@@ -140,12 +140,11 @@
         </div> 
     <button mat-raised-button [disabled] = "surveyForm.invalid" (click)="togglePreview()" id="preview">Preview</button>
     </form>
-    <!-- Add submit button -->
 </div>
 <div *ngIf ="isPreviewing">
 <button mat-raised-button (click)="togglePreview()" id="preview">Edit</button>
 <!-- dummy submit variable -->
-<button mat-raised-button [routerLink]="['']" id="preview">Submit</button>
+<button mat-raised-button (click)="submit()" id="preview">Submit</button>
 <h1><br>{{data.title}}</h1>
 <h4>{{data.description}}</h4>
 <div *ngFor="let question of data.questions; let i = index">

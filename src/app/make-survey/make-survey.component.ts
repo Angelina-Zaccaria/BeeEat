@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { DbService } from '../services/db.service';
 
 interface Question {
   type: string;
@@ -18,9 +19,9 @@ export class MakeSurveyComponent implements OnInit {
   isPreviewing: boolean = false;
   data: any;
 
-  // why has nothing been done to the constructor
+  
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private db: DbService) { 
 
   }
 
@@ -88,6 +89,12 @@ export class MakeSurveyComponent implements OnInit {
 
   submit() {
     // TODO
+    const value = this.surveyForm.value
+    value.questions.map((val, index, array) => {
+      val['type'] = this.questionTypes[index]
+    })
+    console.log(value)
+    this.db.submit('survey', value)
   }
 
   togglePreview() {
