@@ -7,6 +7,7 @@ import { QuestionsComponent } from './questions/questions.component';
 import { PreviewComponent } from './preview/preview.component';
 import { MakeQuizComponent } from './make-quiz/make-quiz.component';
 import { MakeSurveyComponent } from './make-survey/make-survey.component';
+import { SuccessComponent } from './success/success.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
       { path: '', component: MakeQuizComponent },
       { path: '', component: MakeSurveyComponent },
     ]
-  }
+  }, 
+  { path: 'success/:id', component: SuccessComponent}
 ]; 
 
 @NgModule({

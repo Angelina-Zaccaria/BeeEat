@@ -17,6 +17,7 @@ import { MaterialModule } from './material/material.module';
 import { MakeQuizComponent } from './make-quiz/make-quiz.component';
 import { MakeSurveyComponent } from './make-survey/make-survey.component';
 import { PreviewComponent } from './preview/preview.component';
+import { SuccessComponent } from './success/success.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { PreviewComponent } from './preview/preview.component';
     QuestionsComponent,
     MakeQuizComponent,
     MakeSurveyComponent,
-    PreviewComponent
+    PreviewComponent,
+    SuccessComponent
   ],
   imports: [
     BrowserModule,
