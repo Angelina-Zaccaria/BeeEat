@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { DbService } from '../services/db.service';
 
 interface Question {
   type: string;
@@ -21,7 +22,7 @@ export class MakeQuizComponent implements OnInit {
   data: any;
 
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private db: DbService) { 
 
   }
 
@@ -156,7 +157,12 @@ export class MakeQuizComponent implements OnInit {
   }
 
   submit() {
-    // TODO
+    const value = this.quizForm.value
+    value.questions.map((val, index, array) => {
+      val['type'] = this.questionTypes[index]
+    })
+    console.log(value)
+    this.db.submit('quiz', value)
   }
 
   togglePreview() {

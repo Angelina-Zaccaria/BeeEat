@@ -88,7 +88,6 @@ export class MakeSurveyComponent implements OnInit {
   }
 
   submit() {
-    // TODO
     const value = this.surveyForm.value
     value.questions.map((val, index, array) => {
       val['type'] = this.questionTypes[index]
