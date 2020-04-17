@@ -146,7 +146,7 @@ export class MakeQuizComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>, i) {
-    moveItemInArray(this.questionForms.get(i).get('options').controls, event.previousIndex, event.currentIndex);
+    // moveItemInArray(this.questionForms.get(i).get('options').controls, event.previousIndex, event.currentIndex);
     moveItemInArray(this.questionForms.get(i).get('options').value, event.previousIndex, event.currentIndex);
   }
 
