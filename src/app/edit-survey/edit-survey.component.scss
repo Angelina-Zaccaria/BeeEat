@@ -1,22 +1,29 @@
 button {
-    margin-right: 1rem;
-  }
-  
-  form {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
+  margin-right: 1rem;
+}
 
-  .fill-in {
-    width: 100%;
-  }
-  
-  .input {
-    width: 50%;
-  }
-  
+form {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
 
-  #preview {
-    background-color: #ffc642;
-    color: white;
-  }
+.fill-in {
+  width: 100%;
+}
+
+.input {
+  width: 50%;
+}
+
+#preview {
+  background-color: #ffc642;
+  color: white;
+}
+
+mat-form-field {
+  background-color: white;
+}
+
+mat-radio-group {
+  background-color: white;
+}
