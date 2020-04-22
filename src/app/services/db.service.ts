@@ -8,14 +8,22 @@ import { Router } from '@angular/router';
 })
 export class DbService {
 
-  constructor(private afs : AngularFirestore, private router: Router) { }
+  constructor(private afs: AngularFirestore, private router: Router) { }
 
 
   async submit(collection: 'quiz' | 'survey', data: any) {
-    let editKey = this.afs.createId()
+    let editKey = this.afs.createId();
     await this.afs.collection<any>(collection).doc(editKey).set(data);
     this.router.navigate(['/success', editKey])
 
+
+    return editKey;
+  }
+
+  async update(collection: 'quiz' | 'survey', data: any, editKey: string) {
+    console.log(editKey)
+    await this.afs.doc(`${collection}/${editKey}`).set(data);
+    this.router.navigate(['/success', editKey])
 
     return editKey;
   }
