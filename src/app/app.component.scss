@@ -17,18 +17,18 @@ mat-toolbar {
   margin-right: auto;
 }
 
-  .background {
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    z-index: -10;
-    opacity: 30%;
-  }
+.background {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -10;
+  opacity: 30%;
+}
 
-  .container {
-    height: 80vh;
-  }
+.container {
+  height: 80vh;
+}
   
   

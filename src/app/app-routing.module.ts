@@ -8,7 +8,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { MakeQuizComponent } from './make-quiz/make-quiz.component';
 import { MakeSurveyComponent } from './make-survey/make-survey.component';
 import { SuccessComponent } from './success/success.component';
-
+import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,7 +20,8 @@ const routes: Routes = [
       { path: '', component: MakeSurveyComponent },
     ]
   }, 
-  { path: 'success/:id', component: SuccessComponent}
+  { path: 'success/:id', component: SuccessComponent},
+  { path: 'edit', component: EditComponent}
 ]; 
 
 @NgModule({
