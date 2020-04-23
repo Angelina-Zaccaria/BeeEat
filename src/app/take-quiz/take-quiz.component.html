@@ -19,7 +19,7 @@
                 <div *ngSwitchCase="'Multiple Choice'">
                     <strong>{{i + 1}}. {{question.question}}</strong>
                     <div>
-                        <mat-radio-group [formControl]="i.toString()">
+                        <mat-radio-group [formControlName]="i.toString()">
                             <mat-radio-button [value]="question.optionOne">
                                 {{question.optionOne}}
                             </mat-radio-button><br>
@@ -39,7 +39,7 @@
                 <div *ngSwitchCase="'True/False'">
                     <strong>{{i + 1}}. {{question.question}}</strong>
                     <div>
-                        <mat-radio-group [formControl]="i.toString()">
+                        <mat-radio-group [formControlName]="i.toString()">
                             <mat-radio-button [value]="true">True</mat-radio-button><br>
                             <mat-radio-button [value]="false">False</mat-radio-button>
                         </mat-radio-group>
@@ -49,7 +49,7 @@
                     <strong>{{i + 1}}. {{question.question}}</strong>
                     <div>
                         <mat-form-field appearance="fill" class="input">
-                            <input matInput placeholder="Answer Goes Here..." [formControl]="i.toString()">
+                            <input matInput placeholder="Answer Goes Here..." [formControlName]="i.toString()">
                         </mat-form-field>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     <strong>{{i + 1}}. {{question.question}}</strong>
                     <div>
                         <mat-form-field appearance="fill" class="fill-in">
-                            <textarea matInput placeholder="Answer Goes Here..." [formControl]="i.toString()">
+                            <textarea matInput placeholder="Answer Goes Here..." [formControlName]="i.toString()">
                             </textarea>
                         </mat-form-field>
                     </div>
