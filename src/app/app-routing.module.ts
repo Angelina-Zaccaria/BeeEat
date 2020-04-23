@@ -14,15 +14,16 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'take', component: TakeComponent },
   { path: 'make', component: MakeComponent },
-  { path: 'preview', component: PreviewComponent,
-    children:  [
+  {
+    path: 'preview', component: PreviewComponent,
+    children: [
       { path: '', component: MakeQuizComponent },
       { path: '', component: MakeSurveyComponent },
     ]
-  }, 
-  { path: 'success/:id', component: SuccessComponent},
-  { path: 'edit', component: EditComponent}
-]; 
+  },
+  { path: 'success/:id', component: SuccessComponent },
+  { path: 'edit', component: EditComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
