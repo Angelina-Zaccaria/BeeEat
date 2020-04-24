@@ -100,6 +100,13 @@
                             </div> -->
                             <br>
                         </div>
+                <div *ngSwitchCase="'Essay'">
+                    <strong>{{i + 1}}. {{question.question}}</strong>
+                    <div>
+                        <mat-form-field appearance="fill" class="fill-in">
+                            <textarea matInput placeholder="Answer Goes Here..." [formControlName]="i.toString()">
+                            </textarea>
+                        </mat-form-field>
                     </div>
                     <div *ngSwitchCase="'True/False'">
                         <strong>{{i + 1}}. {{question.question}}</strong>

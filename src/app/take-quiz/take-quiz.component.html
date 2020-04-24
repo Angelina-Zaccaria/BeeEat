@@ -62,6 +62,52 @@
                                 </textarea>
                             </mat-form-field>
                         </div>
+</div>
+<ng-template #display>
+    <button mat-icon-button (click)="clear()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{selected.title}}</h1>
+    <p>{{selected.description}}</p>
+    <div *ngFor="let question of selected.questions; let i = index">
+        <form [formGroup]="userInput">
+            <!-- switch on type -->
+            <div [ngSwitch]="question.type">
+                <div *ngSwitchCase="'Multiple Choice'">
+                    <strong>{{i + 1}}. {{question.question}}</strong>
+                    <div>
+                        <mat-radio-group [formControlName]="i.toString()">
+                            <mat-radio-button [value]="question.optionOne">
+                                {{question.optionOne}}
+                            </mat-radio-button><br>
+                            <mat-radio-button [value]="question.optionTwo">
+                                {{question.optionTwo}}
+                            </mat-radio-button><br>
+                            <mat-radio-button [value]="question.optionThree">
+                                {{question.optionThree}}
+                            </mat-radio-button><br>
+                            <mat-radio-button [value]="question.optionFour">
+                                {{question.optionFour}}
+                            </mat-radio-button>
+                            <br>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div *ngSwitchCase="'True/False'">
+                    <strong>{{i + 1}}. {{question.question}}</strong>
+                    <div>
+                        <mat-radio-group [formControlName]="i.toString()">
+                            <mat-radio-button [value]="true">True</mat-radio-button><br>
+                            <mat-radio-button [value]="false">False</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div *ngSwitchCase="'Short Answer'">
+                    <strong>{{i + 1}}. {{question.question}}</strong>
+                    <div>
+                        <mat-form-field appearance="fill" class="input">
+                            <input matInput placeholder="Answer Goes Here..." [formControlName]="i.toString()">
+                        </mat-form-field>
                     </div>
                     <!-- <mat-form-field>
                         <input matInput [formControl]="i">
@@ -102,6 +148,13 @@
                             </div>
                             <br>
                         </div>
+                <div *ngSwitchCase="'Essay'">
+                    <strong>{{i + 1}}. {{question.question}}</strong>
+                    <div>
+                        <mat-form-field appearance="fill" class="fill-in">
+                            <textarea matInput placeholder="Answer Goes Here..." [formControlName]="i.toString()">
+                            </textarea>
+                        </mat-form-field>
                     </div>
                     <div *ngSwitchCase="'True/False'">
                         <strong>{{i + 1}}. {{question.question}}</strong>
