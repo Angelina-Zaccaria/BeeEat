@@ -1,199 +1,200 @@
-<div class="main-content" *ngIf = "!isPreviewing">
-    <form [formGroup] = "surveyForm">
-        <div class="row header">
-            <div class="col-md-12">
-                <mat-form-field appearance="fill" class="input">
-                    <input type = "text" matInput placeholder="Add Title" formControlName = "title">
-                </mat-form-field>
+<div class="main-content">
+    <div *ngIf = "!isPreviewing">
+        <form [formGroup] = "surveyForm">
+            <div class="row header">
+                <div class="col-md-12">
+                    <mat-form-field appearance="fill" class="input">
+                        <input type = "text" matInput placeholder="Add Title" formControlName = "title">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-12">
+                    <mat-form-field appearance="fill" class="fill-in">
+                        <textarea matInput placeholder="Add Description" formControlName = "description"></textarea>
+                    </mat-form-field>
+                </div>
             </div>
-            <div class="col-md-12">
-                <mat-form-field appearance="fill" class="fill-in">
-                    <textarea matInput placeholder="Add Description" formControlName = "description"></textarea>
-                </mat-form-field>
+        
+            <div *ngIf="questionTypes.length > 0; else noQuestions" formArrayName = "questions">
+                <div *ngFor="let question of questionForms.controls; let i = index"
+                    [formGroupName] = "i">
+                    <div [ngSwitch]="questionTypes[i]">
+                        <div *ngSwitchCase="'Multiple Choice'">
+                            <strong>Question {{i + 1}}:</strong>
+                            <p>{{question.type}}</p>
+                            <div>
+                                <mat-form-field appearance="fill" class="input">
+                                    <input matInput placeholder="Write Question Here..." formControlName = "question">
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-radio-group class="input">
+                                    <mat-radio-button disabled value = "1">
+                                        <mat-form-field appearance="fill">
+                                            <input matInput placeholder="Option One..." formControlName = "optionOne">
+                                        </mat-form-field>
+                                    </mat-radio-button><br>
+                                    <mat-radio-button disabled value = "2">
+                                        <mat-form-field appearance="fill">
+                                            <input matInput placeholder="Option Two..." formControlName = "optionTwo">
+                                        </mat-form-field>
+                                    </mat-radio-button><br>
+                                    <mat-radio-button disabled value = "3">
+                                        <mat-form-field appearance="fill">
+                                            <input matInput placeholder="Option Three..." formControlName = "optionThree">
+                                        </mat-form-field>
+                                    </mat-radio-button><br>
+                                    <mat-radio-button disabled value = "4">
+                                        <mat-form-field appearance="fill">
+                                            <input matInput placeholder="Option Four..." formControlName = "optionFour">
+                                        </mat-form-field>
+                                    </mat-radio-button><br>
+                                </mat-radio-group>
+                            </div>
+                            <div>
+                                <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
+                            </div>
+                            <br>
+                        </div>
+                        
+                        <div *ngSwitchCase="'True/False'">
+                            <strong>Question {{i + 1}}:</strong>
+                            <p>{{question.type}}</p>
+                            <div>
+                                <mat-form-field appearance="fill" class="input">
+                                    <input matInput placeholder="Write Question Here..." formControlName = "question">
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-radio-group>
+                                    <mat-radio-button disabled value = "true">true</mat-radio-button><br>
+                                    <mat-radio-button disabled value = "false">false</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div>
+                                <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
+                            </div>
+                            <br>
+                        </div>
+
+                        <div *ngSwitchCase="'Short Answer'" >
+                            <strong>Question {{i + 1}}:</strong>
+                            <p>{{question.type}}</p>
+                            <div>
+                                <mat-form-field appearance="fill" class="input">
+                                    <input matInput placeholder="Write Question Here..." formControlName = "question">
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="fill" class="input">
+                                    <input disabled matInput placeholder="Response goes here...">
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
+                            </div>
+                            <br>
+                        </div>
+
+                        <div *ngSwitchCase="'Essay'" >
+                            <strong>Question {{i + 1}}:</strong>
+                            <p>{{question.type}}</p>
+                            <div>
+                                <mat-form-field appearance="fill" class="input">
+                                    <input matInput placeholder="Write Question Here..." formControlName = "question">
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="fill" class="fill-in">
+                                    <textarea disabled matInput placeholder="Response goes here...">
+                                    </textarea>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    
-        <div *ngIf="questionTypes.length > 0; else noQuestions" formArrayName = "questions">
-            <div *ngFor="let question of questionForms.controls; let i = index"
-                [formGroupName] = "i">
-                <div [ngSwitch]="questionTypes[i]">
-                    <div *ngSwitchCase="'Multiple Choice'">
-                        <strong>Question {{i + 1}}:</strong>
-                        <p>{{question.type}}</p>
-                        <div>
-                            <mat-form-field appearance="fill" class="input">
-                                <input matInput placeholder="Write Question Here..." formControlName = "question">
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <mat-radio-group class="input">
-                                <mat-radio-button disabled value = "1">
-                                    <mat-form-field appearance="fill">
-                                        <input matInput placeholder="Option One..." formControlName = "optionOne">
-                                    </mat-form-field>
-                                </mat-radio-button><br>
-                                <mat-radio-button disabled value = "2">
-                                    <mat-form-field appearance="fill">
-                                        <input matInput placeholder="Option Two..." formControlName = "optionTwo">
-                                    </mat-form-field>
-                                </mat-radio-button><br>
-                                <mat-radio-button disabled value = "3">
-                                    <mat-form-field appearance="fill">
-                                        <input matInput placeholder="Option Three..." formControlName = "optionThree">
-                                    </mat-form-field>
-                                </mat-radio-button><br>
-                                <mat-radio-button disabled value = "4">
-                                    <mat-form-field appearance="fill">
-                                        <input matInput placeholder="Option Four..." formControlName = "optionFour">
-                                    </mat-form-field>
-                                </mat-radio-button><br>
-                            </mat-radio-group>
-                        </div>
-                        <div>
-                            <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
-                        </div>
-                        <br>
+            <ng-template #noQuestions>
+                <p>Add a question to get started...</p>
+            </ng-template>
+        
+        <!-- </form> -->
+        <!-- </form> -->
+        
+        <button mat-raised-button (click)="addMultipleChoice()" class="gray">Add Multiple Choice</button>
+        <button mat-raised-button (click)="addTrueFalse()" class="gray">Add True/False</button>
+        <button mat-raised-button (click)="addShortAnswer()" class="gray">Add Short Answer</button>
+        <button mat-raised-button (click)="addEssay()" class="gray">Add Essay</button><br>
+        <br>
+        <div *ngIf="surveyForm.invalid">
+            <p> 
+                All fields must be filled out correctly before you can preview!
+            </p>
+        </div> 
+        <div *ngIf="surveyForm.valid">
+                <p> 
+                    You can now preview!
+                </p>
+            </div> 
+        <button mat-raised-button [disabled] = "surveyForm.invalid" (click)="togglePreview()" class="go">Preview</button>
+        </form>
+    </div>
+    <div *ngIf ="isPreviewing">
+        <h1><br>{{data.title}}</h1>
+        <h4>{{data.description}}</h4>
+        <div *ngFor="let question of data.questions; let i = index">
+            <div [ngSwitch] = "questionTypes[i]">
+                <div *ngSwitchCase = "'Multiple Choice'">
+                    <strong>{{i + 1}}. {{question.question}}</strong>
+                    <div>
+                        <mat-radio-group value = question.answer>
+                            <mat-radio-button value = "1">
+                                {{question.optionOne}}
+                            </mat-radio-button><br>
+                            <mat-radio-button value = "2">
+                                {{question.optionTwo}}
+                            </mat-radio-button><br>
+                            <mat-radio-button value = "3">
+                                {{question.optionThree}}
+                            </mat-radio-button><br>
+                            <mat-radio-button value = "4">
+                                {{question.optionFour}}
+                            </mat-radio-button><br>
+                        </mat-radio-group>
                     </div>
-                    
-                    <div *ngSwitchCase="'True/False'">
-                        <strong>Question {{i + 1}}:</strong>
-                        <p>{{question.type}}</p>
-                        <div>
-                            <mat-form-field appearance="fill" class="input">
-                                <input matInput placeholder="Write Question Here..." formControlName = "question">
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <mat-radio-group>
-                                <mat-radio-button disabled value = "true">True</mat-radio-button><br>
-                                <mat-radio-button disabled value = "false">False</mat-radio-button>
-                            </mat-radio-group>
-                        </div>
-                        <div>
-                            <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
-                        </div>
-                        <br>
+                </div>
+                <div *ngSwitchCase = "'True/False'">
+                    <strong>{{i + 1}}. {{question.question}}</strong>
+                    <div>
+                        <mat-radio-group value = question.answer>
+                            <mat-radio-button value = "true">true</mat-radio-button><br>
+                            <mat-radio-button value = "false">false</mat-radio-button>
+                        </mat-radio-group>
                     </div>
-
-                    <div *ngSwitchCase="'Short Answer'" >
-                        <strong>Question {{i + 1}}:</strong>
-                        <p>{{question.type}}</p>
-                        <div>
-                            <mat-form-field appearance="fill" class="input">
-                                <input matInput placeholder="Write Question Here..." formControlName = "question">
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <mat-form-field appearance="fill" class="input">
-                                <input disabled matInput placeholder="Response goes here...">
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
-                        </div>
-                        <br>
+                </div>
+                <div *ngSwitchCase = "'Short Answer'">
+                    <strong>{{i + 1}}. {{question.question}}</strong>
+                    <div>
+                        <mat-form-field appearance="fill" class="input">
+                            <input matInput placeholder="Answer Goes Here...">
+                        </mat-form-field>
                     </div>
-
-                    <div *ngSwitchCase="'Essay'" >
-                        <strong>Question {{i + 1}}:</strong>
-                        <p>{{question.type}}</p>
-                        <div>
-                            <mat-form-field appearance="fill" class="input">
-                                <input matInput placeholder="Write Question Here..." formControlName = "question">
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <mat-form-field appearance="fill" class="fill-in">
-                                <textarea disabled matInput placeholder="Response goes here...">
-                                </textarea>
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
-                        </div>
-                        <br>
+                </div>
+                <div *ngSwitchCase = "'Essay'">
+                    <strong>{{i + 1}}. {{question.question}}</strong>
+                    <div>
+                        <mat-form-field appearance="fill" class="fill-in">
+                            <textarea matInput placeholder="Answer Goes Here...">
+                            </textarea>
+                        </mat-form-field>
                     </div>
                 </div>
             </div>
         </div>
-        <ng-template #noQuestions>
-            <p>Add a question to get started...</p>
-        </ng-template>
-    
-    <!-- </form> -->
-    <!-- </form> -->
-    
-    <button mat-raised-button (click)="addMultipleChoice()">Add Multiple Choice</button>
-    <button mat-raised-button (click)="addTrueFalse()">Add True/False</button>
-    <button mat-raised-button (click)="addShortAnswer()">Add Short Answer</button>
-    <button mat-raised-button (click)="addEssay()">Add Essay</button><br>
-    <br>
-    <div *ngIf="surveyForm.invalid">
-        <p> 
-            All fields must be filled out correctly before you can preview!
-        </p>
-    </div> 
-    <div *ngIf="surveyForm.valid">
-            <p> 
-                You can now preview!
-            </p>
-        </div> 
-    <button mat-raised-button [disabled] = "surveyForm.invalid" (click)="togglePreview()" id="preview">Preview</button>
-    </form>
-</div>
-<div *ngIf ="isPreviewing">
-<button mat-raised-button (click)="togglePreview()" id="preview">Edit</button>
-<!-- dummy submit variable -->
-<button mat-raised-button (click)="submit()" id="preview">Submit</button>
-<h1><br>{{data.title}}</h1>
-<h4>{{data.description}}</h4>
-<div *ngFor="let question of data.questions; let i = index">
-    <div [ngSwitch] = "questionTypes[i]">
-        <div *ngSwitchCase = "'Multiple Choice'">
-            <strong>{{i + 1}}. {{question.question}}</strong>
-            <div>
-                <mat-radio-group value = question.answer>
-                    <mat-radio-button value = "1">
-                        {{question.optionOne}}
-                    </mat-radio-button><br>
-                    <mat-radio-button value = "2">
-                        {{question.optionTwo}}
-                    </mat-radio-button><br>
-                    <mat-radio-button value = "3">
-                        {{question.optionThree}}
-                    </mat-radio-button><br>
-                    <mat-radio-button value = "4">
-                        {{question.optionFour}}
-                    </mat-radio-button><br>
-                </mat-radio-group>
-            </div>
-        </div>
-        <div *ngSwitchCase = "'True/False'">
-            <strong>{{i + 1}}. {{question.question}}</strong>
-            <div>
-                <mat-radio-group value = question.answer>
-                    <mat-radio-button value = "true">True</mat-radio-button><br>
-                    <mat-radio-button value = "false">False</mat-radio-button>
-                </mat-radio-group>
-            </div>
-        </div>
-        <div *ngSwitchCase = "'Short Answer'">
-            <strong>{{i + 1}}. {{question.question}}</strong>
-            <div>
-                <mat-form-field appearance="fill" class="input">
-                    <input matInput placeholder="Answer Goes Here...">
-                </mat-form-field>
-            </div>
-        </div>
-        <div *ngSwitchCase = "'Essay'">
-            <strong>{{i + 1}}. {{question.question}}</strong>
-            <div>
-                <mat-form-field appearance="fill" class="fill-in">
-                    <textarea matInput placeholder="Answer Goes Here...">
-                    </textarea>
-                </mat-form-field>
-            </div>
-        </div>
+        <button mat-raised-button (click)="togglePreview()" class="gray">Edit</button>
+        <button mat-raised-button (click)="submit()" class="go">Submit</button>
     </div>
-</div>
 </div>

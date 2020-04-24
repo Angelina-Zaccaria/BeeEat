@@ -71,8 +71,8 @@
                         </div>
                         <div>
                             <mat-radio-group>
-                                <mat-radio-button disabled value = "true">True</mat-radio-button><br>
-                                <mat-radio-button disabled value = "false">False</mat-radio-button>
+                                <mat-radio-button disabled value = "true">true</mat-radio-button><br>
+                                <mat-radio-button disabled value = "false">false</mat-radio-button>
                             </mat-radio-group>
                         </div>
                         <div>
@@ -144,13 +144,13 @@
                 You can now preview!
             </p>
         </div> 
-    <button mat-raised-button [disabled] = "editSurveyForm.invalid" (click)="togglePreview()" id="preview">Preview</button>
+    <button mat-raised-button [disabled] = "editSurveyForm.invalid" (click)="togglePreview()" class="go">Preview</button>
     </form>
 </div>
 <div *ngIf ="isPreviewing">
-<button mat-raised-button (click)="togglePreview()" id="preview">Edit</button>
+<button mat-raised-button (click)="togglePreview()" class="go">Edit</button>
 <!-- dummy submit variable -->
-<button mat-raised-button (click)="submit()" id="preview">Submit</button>
+<button mat-raised-button (click)="submit()" class="go">Submit</button>
 <h1><br>{{data.title}}</h1>
 <h4>{{data.description}}</h4>
 <div *ngFor="let question of data.questions; let i = index">
@@ -178,8 +178,8 @@
             <strong>{{i + 1}}. {{question.question}}</strong>
             <div>
                 <mat-radio-group value = question.answer>
-                    <mat-radio-button value = "true">True</mat-radio-button><br>
-                    <mat-radio-button value = "false">False</mat-radio-button>
+                    <mat-radio-button value = "true">true</mat-radio-button><br>
+                    <mat-radio-button value = "false">false</mat-radio-button>
                 </mat-radio-group>
             </div>
         </div>
