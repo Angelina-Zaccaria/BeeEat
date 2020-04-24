@@ -1,4 +1,7 @@
-<p>This is your ID to edit: {{id}}</p>
-<button cdkCopyToClipBoard = "success">
-        Copy to clipboard
-<button>
+<div class="content">
+   <div class="main-content">
+        <h3><strong>This is your access code to edit: </strong></h3>
+        {{id}}<br><br>
+        <button mat-raised-button class="gray" cdkCopyToClipboard = {{id}}>Copy to clipboard <mat-icon>assignment</mat-icon></button>
+    </div>
+</div>
