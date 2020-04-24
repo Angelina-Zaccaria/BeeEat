@@ -1,72 +1,155 @@
-<div *ngIf="!selected; else display">
-    <div *ngFor="let quiz of quizList$ | async">
-        <div class="quiz-link" (click)="select(quiz)">
-            <h1>{{quiz.title}}</h1>
-            <h3>{{quiz.description}}</h3>
+<div class="main-content"> 
+    <div *ngIf="!selected; else display">
+        <div *ngFor="let quiz of quizList$ | async">
+            <div class="quiz-link" (click)="select(quiz)">
+                <h3>{{quiz.title}}</h3>
+            </div>
         </div>
     </div>
-</div>
-<ng-template #display>
-    <button mat-icon-button (click)="clear()">
-        <mat-icon>arrow_back</mat-icon>
-    </button>
-    <h1>{{selected.title}}</h1>
-    <p>{{selected.description}}</p>
-    <div *ngFor="let question of selected.questions; let i = index">
-        <form [formGroup]="userInput">
-            <!-- switch on type -->
-            <div [ngSwitch]="question.type">
-                <div *ngSwitchCase="'Multiple Choice'">
-                    <strong>{{i + 1}}. {{question.question}}</strong>
-                    <div>
-                        <mat-radio-group [formControl]="i.toString()">
-                            <mat-radio-button [value]="question.optionOne">
-                                {{question.optionOne}}
-                            </mat-radio-button><br>
-                            <mat-radio-button [value]="question.optionTwo">
-                                {{question.optionTwo}}
-                            </mat-radio-button><br>
-                            <mat-radio-button [value]="question.optionThree">
-                                {{question.optionThree}}
-                            </mat-radio-button><br>
-                            <mat-radio-button [value]="question.optionFour">
-                                {{question.optionFour}}
-                            </mat-radio-button>
-                            <br>
-                        </mat-radio-group>
+    <ng-template #display>
+        <div *ngIf = "!submitClicked">
+        <button mat-icon-button (click)="clear()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h1>{{selected.title}}</h1>
+        <p>{{selected.description}}</p>
+        <div *ngFor="let question of selected.questions; let i = index">
+            <form [formGroup]="userInput">
+                <!-- switch on type -->
+                <div [ngSwitch]="question.type">
+                    <div *ngSwitchCase="'Multiple Choice'">
+                        <strong>{{i + 1}}. {{question.question}}</strong>
+                        <div>
+                            <mat-radio-group [formControlName]="i.toString()">
+                                <mat-radio-button [value]="question.optionOne">
+                                    {{question.optionOne}}
+                                </mat-radio-button><br>
+                                <mat-radio-button [value]="question.optionTwo">
+                                    {{question.optionTwo}}
+                                </mat-radio-button><br>
+                                <mat-radio-button [value]="question.optionThree">
+                                    {{question.optionThree}}
+                                </mat-radio-button><br>
+                                <mat-radio-button [value]="question.optionFour">
+                                    {{question.optionFour}}
+                                </mat-radio-button>
+                                <br>
+                            </mat-radio-group>
+                        </div>
                     </div>
-                </div>
-                <div *ngSwitchCase="'True/False'">
-                    <strong>{{i + 1}}. {{question.question}}</strong>
-                    <div>
-                        <mat-radio-group [formControl]="i.toString()">
-                            <mat-radio-button [value]="true">True</mat-radio-button><br>
-                            <mat-radio-button [value]="false">False</mat-radio-button>
-                        </mat-radio-group>
+                    <div *ngSwitchCase="'True/False'">
+                        <strong>{{i + 1}}. {{question.question}}</strong>
+                        <div>
+                            <mat-radio-group [formControlName]="i.toString()">
+                                <mat-radio-button [value]="'true'">true</mat-radio-button><br>
+                                <mat-radio-button [value]="'false'">false</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
                     </div>
-                </div>
-                <div *ngSwitchCase="'Short Answer'">
-                    <strong>{{i + 1}}. {{question.question}}</strong>
-                    <div>
-                        <mat-form-field appearance="fill" class="input">
-                            <input matInput placeholder="Answer Goes Here..." [formControl]="i.toString()">
-                        </mat-form-field>
+                    <div *ngSwitchCase="'Short Answer'">
+                        <strong>{{i + 1}}. {{question.question}}</strong>
+                        <div>
+                            <mat-form-field appearance="fill" class="input">
+                                <input matInput placeholder="Answer Goes Here..." [formControlName]="i.toString()">
+                            </mat-form-field>
+                        </div>
                     </div>
-                </div>
-                <div *ngSwitchCase="'Essay'">
-                    <strong>{{i + 1}}. {{question.question}}</strong>
-                    <div>
-                        <mat-form-field appearance="fill" class="fill-in">
-                            <textarea matInput placeholder="Answer Goes Here..." [formControl]="i.toString()">
-                            </textarea>
-                        </mat-form-field>
+                    <div *ngSwitchCase="'Essay'">
+                        <strong>{{i + 1}}. {{question.question}}</strong>
+                        <div>
+                            <mat-form-field appearance="fill" class="fill-in">
+                                <textarea matInput placeholder="Answer Goes Here..." [formControlName]="i.toString()">
+                                </textarea>
+                            </mat-form-field>
+                        </div>
                     </div>
+                    <!-- <mat-form-field>
+                        <input matInput [formControl]="i">
+                    </mat-form-field> -->
                 </div>
-                <!-- <mat-form-field>
-                    <input matInput [formControl]="i">
-                </mat-form-field> -->
-            </div>
-        </form>
+            </form>
+        </div>
+        <button mat-raised-button (click)="submit()" class="go">Submit</button>
     </div>
-    <button mat-raised-button (click)="submit()">Submit</button>
-</ng-template>
+    <div *ngIf = "submitClicked">
+        <!-- <button mat-icon-button (click)="clear()">
+            <mat-icon>arrow_back</mat-icon>
+        </button> -->
+        <h1>{{selected.title}}</h1>
+        <p>{{selected.description}}</p>
+        <div *ngFor="let question of selected.questions; let i = index; ">
+                <!-- switch on type -->
+                <div [ngSwitch]="question.type">
+                    <div *ngSwitchCase="'Multiple Choice'">
+                        <strong>{{i + 1}}. {{question.question}}</strong>
+                        <div> 
+                            <br>
+                            Points: {{question.value}}<br>                          
+                            Your Answer: {{userInput.value[i.toString()]}}<br> 
+                            <div [ngSwitch] = "question.answer">
+                                <div *ngSwitchCase = "1">
+                                    Correct Answer: {{question.optionOne}}
+                                </div>
+                                <div *ngSwitchCase = "2">
+                                    Correct Answer: {{question.optionTwo}}
+                                </div>
+                                <div *ngSwitchCase = "3">
+                                    Correct Answer: {{question.optionThree}} 
+                                </div>
+                                <div *ngSwitchCase = "4">
+                                    Correct Answer: {{question.optionFour}}
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'True/False'">
+                        <strong>{{i + 1}}. {{question.question}}</strong>
+                        <div>
+                            <br>
+                            Points: {{question.value}}<br>
+                            Your Answer: {{userInput.value[i.toString()]}}<br>
+                            <div [ngSwitch] = "question.answer">
+                                <div *ngSwitchCase = "'true'">
+                                    Correct Answer: true
+                                </div>
+                                <div *ngSwitchCase = "'false'">
+                                    Correct Answer: false
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'Short Answer'">
+                        <strong>{{i + 1}}. {{question.question}}</strong>
+                        <div>
+                            <br>
+                            Points: {{question.value}} *credit may not be given if worded differently from answer*<br>
+                            Your Answer: {{userInput.value[i.toString()]}}<br>
+                            Correct Answer: {{question.answer}}
+                        </div>
+                        <br>
+                    </div>
+                    <div *ngSwitchCase="'Essay'">
+                        <strong>{{i + 1}}. {{question.question}}</strong>
+                        <div>
+                            <br>
+                            Points: {{question.value}} *credit may not be given if worded differently from answer*<br>
+                            Your Answer: {{userInput.value[i.toString()]}}<br>
+                            Correct Answer: {{question.answer}}
+                        </div>
+                        <br>
+                    </div>
+                    <!-- <mat-form-field>
+                        <input matInput [formControl]="i">
+                    </mat-form-field> -->
+                </div>
+        </div>
+        <div>
+            Points Earned: {{pointsScored}}<br>
+            Total Points: {{totalWorth}}<br>
+            Your Score: {{totalScore}}%<br>
+        </div>
+    </div>
+    </ng-template>
+</div>
