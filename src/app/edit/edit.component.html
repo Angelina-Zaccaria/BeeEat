@@ -1,22 +1,34 @@
-
-<div *ngIf="!data; else edit">
-    <form [formGroup]="EditId">
-        <div class="row header">
-            <div class="col-md-12">
-                <mat-form-field appearance="fill" class="input">
-                    <input type="text" matInput placeholder="Enter Access Code Here" formControlName="id">
-                </mat-form-field>
+<div class="content">
+    <div *ngIf="!data; else edit" class="main-content">
+        <form [formGroup]="EditId">
+            <div class="row header">
+                <div class="col-md-12">
+                    <h2>Welcome back!</h2>
+                    <mat-form-field appearance="fill" class="input">
+                        <input type="text" matInput placeholder="Enter Access Code Here" formControlName="id">
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button (click)="checkID()" class="go">Submit</button>
             </div>
-            <button mat-raised-button (click)="checkID()">Submit</button>
-        </div>
-    </form>
-</div>
-<ng-template #edit>
-    <div *ngIf="type === 'quiz'; else survey">
-        <app-edit-quiz [data]="data" [id]="docId"></app-edit-quiz>
+        </form>
     </div>
-    <ng-template #survey>
-        <app-edit-survey [data]="data" [id]="docId"></app-edit-survey>
-    </ng-template>    
-</ng-template>
-
+    <ng-template #edit>
+        <!-- <div *ngIf="type === 'quiz'; else survey">
+            <app-edit-quiz [data]="data" [id]="docId"></app-edit-quiz>
+        </div>
+        <ng-template #survey>
+            <div *ngIf="type === 'survey'; else invalid">
+                <app-edit-survey [data]="data" [id]="docId"></app-edit-survey>
+            </div>
+        </ng-template>   
+        <ng-template #invalid>
+            <script>alert("Invalid access code")</script>
+        </ng-template> -->
+        <div *ngIf="type === 'quiz'; else survey">
+            <app-edit-quiz [data]="data" [id]="docId"></app-edit-quiz>
+        </div>
+        <ng-template #survey>
+            <app-edit-survey [data]="data" [id]="docId"></app-edit-survey>
+        </ng-template>    
+    </ng-template>
+</div>
