@@ -11,7 +11,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .main-content {
     width: 90%;
-    margin-top: 1rem;
+    // margin-top: 1rem;
     padding: 2rem;
 }
 
@@ -21,4 +21,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .dark {
     background-color: #ffc642;
+}
+
+.content { 
+    background: white; 
+    max-width: 80%; 
+    margin: 3% auto auto; 
+    padding: 1% 2%; 
+    border-radius: 3px; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.gray {
+    background-color: #f0f0f0;
+}
+
+.go {
+    background-color: #ffc642;
+    color: black;
 }
