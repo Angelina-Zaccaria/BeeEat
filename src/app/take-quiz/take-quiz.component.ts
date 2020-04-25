@@ -41,11 +41,22 @@ export class TakeQuizComponent implements OnInit {
     let groupData = {}
     for (let i = 0; i < quiz.questions.length; i++) {
       // groupData[`${i}`] = ['', Validators.required];
-      groupData[`${i}`] = '';
+      if (quiz.questions[i].type == 'Ranking') {
+        let data = {};
+        data[`${quiz.questions[i].optionOne}`] = '';
+        data[`${quiz.questions[i].optionTwo}`] = '';
+        data[`${quiz.questions[i].optionThree}`] = '';
+        data[`${quiz.questions[i].optionFour}`] = '';
+        console.log(data);
+        groupData[`${i}`] = this.fb.group(data);
+      } else {
+        groupData[`${i}`] = '';
+      }
+
     }
     this.userInput = this.fb.group(groupData);
     this.userInput.valueChanges.subscribe(console.log);
-    this.selected = quiz; 
+    this.selected = quiz;
     console.log(groupData);
   }
 
@@ -62,17 +73,25 @@ export class TakeQuizComponent implements OnInit {
     this.checkAnswers();
   }
 
-  checkAnswers(){
+  checkAnswers() {
 
-    for(var i = 0; i < this.selected.questions.length; i++){
-        this.totalWorth += Number(this.selected.questions[i].value);
-        console.log(this.selected.questions[i].answer);
-        console.log(this.userInput.value[`${i}`]);
-        if(this.selected.questions[i].answer === this.userInput.value[`${i}`]){
+    for (var i = 0; i < this.selected.questions.length; i++) {
+      this.totalWorth += Number(this.selected.questions[i].value);
+      console.log(this.selected.questions[i].answer);
+      console.log(this.userInput.value[`${i}`]);
+      if(this.selected.questions[i].type === 'Ranking'){
+        if(this.userInput.value[i.toString()][this.selected.questions[i].optionOne] == this.selected.questions[i].rankOne
+        && this.userInput.value[i.toString()][this.selected.questions[i].optionTwo] == this.selected.questions[i].rankTwo
+        && this.userInput.value[i.toString()][this.selected.questions[i].optionThree] == this.selected.questions[i].rankThree
+        && this.userInput.value[i.toString()][this.selected.questions[i].optionFour] == this.selected.questions[i].rankFour){
           this.pointsScored += Number(this.selected.questions[i].value);
         }
+      }
+      if (this.selected.questions[i].answer === this.userInput.value[`${i}`]) {
+        this.pointsScored += Number(this.selected.questions[i].value);
+      }
     }
-    this.totalScore = this.pointsScored/this.totalWorth*100;
+    this.totalScore = this.pointsScored / this.totalWorth * 100;
   }
 
 
