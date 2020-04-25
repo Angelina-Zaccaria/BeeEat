@@ -5,12 +5,17 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { Router } from '@angular/router';
 
+import { firestore } from 'firebase';
+import { map, take, tap } from 'rxjs/operators';
+
 @Component({
   selector: 'app-take-survey',
   templateUrl: './take-survey.component.html',
   styleUrls: ['./take-survey.component.scss']
 })
 export class TakeSurveyComponent implements OnInit {
+
+  responseCounts = {};
 
 
   userInput: FormGroup;
@@ -37,17 +42,39 @@ export class TakeSurveyComponent implements OnInit {
       groupData[`${i}`] = '';
     }
     this.userInput = this.fb.group(groupData);
-    this.userInput.valueChanges.subscribe(console.log);
+    // this.userInput.valueChanges.subscribe(console.log);
     this.selected = survey; 
-    console.log(groupData);
+    // console.log(groupData);
   }
 
-  // totalUsers() {
-  //   const db = firebase.firestore();
-  //   const increment = firebase.firestore.FieldValue.increment(1);
+  incrementUsers() {
+    const db = firestore();
+    const increment = firestore.FieldValue.increment(1);
 
-  //   const survey = db.collection('survey').doc(`${this.selected.id}`)
-  // }
+    const survey = db.collection('survey').doc(`${this.selected.id}`)
+
+    survey.update({count: increment});
+  }
+
+  getTotalResponses() {
+    this.responseCounts = {};
+    for (let i = 0; i < Object.keys(this.userInput.value).length; i++) {
+      this.totalResponse(this.selected.id, i.toString(), this.userInput.value[i.toString()]);
+    }
+  }
+
+  private totalResponse(surveyID, questionNumber, answerValue) {
+    this.afs.collection(`survey/${surveyID}/answers`, ref => ref.where(questionNumber, '==', answerValue)).get().subscribe(results => {
+      this.responseCounts[questionNumber] = {
+        count: results.size,
+        answer: this.userInput.value[questionNumber]
+      }
+    })
+  }
+
+  totalUsers() {
+    return this.selected.count;
+  }
 
 
   clear() {
@@ -63,8 +90,7 @@ export class TakeSurveyComponent implements OnInit {
       // , {state: {userInput: this.userInput, data: this.selected}}
     })
     this.submitClicked = !this.submitClicked;
+    this.getTotalResponses();
   }
 
 }
-
-
