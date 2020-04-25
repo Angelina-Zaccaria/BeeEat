@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -24,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatRadioModule,
     DragDropModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
   exports: [
     MatButtonModule,
@@ -35,7 +36,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatRadioModule,
     DragDropModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DbService } from '../services/db.service';
 
 interface Question {
@@ -119,37 +119,51 @@ export class MakeQuizComponent implements OnInit {
 
   addRanking() {
     const ranking = this.fb.group({
-      question: ['', Validators.required], 
-      options: this.fb.array([
-        this.fb.group({
-          option: this.fb.control(''),
-        }),
-        this.fb.group({
-          option: this.fb.control(''),
-        }),
-        this.fb.group({
-          option: this.fb.control(''),
-        }),
-        this.fb.group({
-          option: this.fb.control(''),
-        })          
-      ]),
+      question: ['', Validators.required],
+      optionOne: ['', Validators.required],
+      rankOne: ['', Validators.required],
+      optionTwo: ['', Validators.required],
+      rankTwo: ['', Validators.required,],
+      optionThree: ['', Validators.required],
+      rankThree: ['', Validators.required],
+      optionFour: ['', Validators.required],
+      rankFour: ['', Validators.required],
       value: [null, [
         Validators.required,
         Validators.min(0),
         Validators.pattern('[0-9]*')
       ]]
     })
+
     this.questionTypes.push('Ranking')
     this.questionForms.push(ranking)
-
   }
 
-  drop(event: CdkDragDrop<string[]>, i) {
-    // moveItemInArray(this.questionForms.get(i).get('options').controls, event.previousIndex, event.currentIndex);
-    moveItemInArray(this.questionForms.get(i).get('options').value, event.previousIndex, event.currentIndex);
-  }
+  addMatching() {
+    const matching = this.fb.group({
+      question: ['', Validators.required],
+      questionOne: ['', Validators.required],
+      answerOne: ['', Validators.required],
+      questionTwo: ['', Validators.required],
+      answerTwo: ['', Validators.required,],
+      questionThree: ['', Validators.required],
+      answerThree: ['', Validators.required],
+      questionFour: ['', Validators.required],
+      answerFour: ['', Validators.required],
+      answerA: ['', Validators.required],
+      answerB: ['', Validators.required],
+      answerC: ['', Validators.required],
+      answerD: ['', Validators.required],
+      value: [null, [
+        Validators.required,
+        Validators.min(0),
+        Validators.pattern('[0-9]*')
+      ]]
+    })
 
+    this.questionTypes.push('Matching')
+    this.questionForms.push(matching)
+  }
 
   deleteQuestion(i){
     this.questionForms.removeAt(i)
