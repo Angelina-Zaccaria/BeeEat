@@ -82,6 +82,18 @@ export class MakeSurveyComponent implements OnInit {
     // this.questions.push({ type: "Short Answer" });
   }
 
+  addRanking() {
+    const ranking = this.fb.group({
+      question: ['', Validators.required],
+      optionOne: ['', Validators.required],
+      optionTwo: ['', Validators.required],
+      optionThree: ['', Validators.required],
+      optionFour: ['', Validators.required],
+    })
+    this.questionTypes.push('Ranking')
+    this.questionForms.push(ranking)
+  }
+
   deleteQuestion(i){
     this.questionForms.removeAt(i)
     this.questionTypes.splice(i, 1)

@@ -1,8 +1,4 @@
-<p>edit-quiz works!</p>
-<pre>
-{{data | json}}
-</pre>
-<div class="main-content" *ngIf = "!isPreviewing">
+<div *ngIf = "!isPreviewing" class="main-content">
     <form [formGroup] = "editQuizForm">
         <div class="row header">
             <div class="col-md-12">
@@ -161,31 +157,71 @@
                         <br>
                     </div>
 
-                    
-                    <!-- <div *ngSwitchCase="'Ranking'" >
+                    <div *ngSwitchCase="'Ranking'" >
                         <strong>Question {{i + 1}}:</strong>
                         <p>{{question.type}}</p>
-                        <div>
+                        <div> 
                             <mat-form-field appearance="fill" class="input">
-                                <input matInput placeholder="Write Question Here..." formControlName = "question">
+                                <input matInput placeholder="Write Question or Instructions Here..." formControlName = "question">
                             </mat-form-field>
                         </div>
-                        <div> -->
-                            <!-- <mat-form-field appearance="fill" class="fill-in">
-                                <textarea matInput placeholder="Answer Goes Here..." formControlName = "answer">
-                                </textarea>
-                            </mat-form-field> -->
-                            <!-- <span *ngIf="question.controls.answer.errors?.maxlength">
-                                The maximum character limit is 500!
-                            </span> -->
-                            <!-- <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event, i)">
-                            <div *ngFor="let item of question.get('options').controls" [formGroup] = "item" cdkDrag> -->
-                                <!-- <span cdkDragHandle>drag</span> -->
-                                <!-- <mat-form-field appearance="fill" class="input">
-                                <input matInput placeholder="Option..." formControlName="option">
-                                </mat-form-field>
-                            </div>
-                            </div>
+                        <div>
+                            <mat-form-field appearance="fill" class="rank">
+                                <mat-label> Rank</mat-label>
+                                <mat-select formControlName = "rankOne">
+                                    <mat-option [value]="1">1</mat-option>
+                                    <mat-option [value]="2">2</mat-option>
+                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="4">4</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            &nbsp;
+                            <mat-form-field appearance="fill" class="input">
+                                <input matInput placeholder="Option One..." formControlName = "optionOne">
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field appearance="fill" class="rank">
+                                <mat-label> Rank</mat-label>
+                                <mat-select formControlName = "rankTwo">
+                                    <mat-option [value]="1">1</mat-option>
+                                    <mat-option [value]="2">2</mat-option>
+                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="4">4</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            &nbsp;
+                            <mat-form-field appearance="fill" class="input">
+                                <input matInput placeholder="Option Two..." formControlName = "optionTwo">
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field appearance="fill" class="rank">
+                                <mat-label> Rank</mat-label>
+                                <mat-select formControlName = "rankThree">
+                                    <mat-option [value]="1">1</mat-option>
+                                    <mat-option [value]="2">2</mat-option>
+                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="4">4</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            &nbsp;
+                            <mat-form-field appearance="fill" class="input">
+                                <input matInput placeholder="Option Three..." formControlName = "optionThree">
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field appearance="fill" class="rank">
+                                <mat-label> Rank</mat-label>
+                                <mat-select formControlName = "rankFour">
+                                    <mat-option [value]="1">1</mat-option>
+                                    <mat-option [value]="2">2</mat-option>
+                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="4">4</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            &nbsp;
+                            <mat-form-field appearance="fill" class="input">
+                                <input matInput placeholder="Option Four..." formControlName = "optionFour">
+                            </mat-form-field>
+                            <br>
                         </div>
                         <div>
                             Points: 
@@ -200,39 +236,35 @@
                             <button mat-raised-button (click)="deleteQuestion(i)">Delete question</button>
                         </div>
                         <br>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
         <ng-template #noQuestions>
             <p>Add a question to get started...</p>
         </ng-template>
-    
-    
-    <button mat-raised-button (click)="addMultipleChoice()">Add Multiple Choice</button>
-    <button mat-raised-button (click)="addTrueFalse()">Add True/False</button>
-    <button mat-raised-button (click)="addShortAnswer()">Add Short Answer</button>
-    <button mat-raised-button (click)="addEssay()">Add Essay</button><br>
-    <!-- <button mat-raised-button (click)="addRanking()">Add Ranking</button><br> -->
-    <br>
-    <div *ngIf="editQuizForm.invalid">
+
+        <button mat-raised-button (click)="addMultipleChoice()" class="gray">Add Multiple Choice</button>
+        <button mat-raised-button (click)="addTrueFalse()" class="gray">Add True/False</button>
+        <button mat-raised-button (click)="addShortAnswer()" class="gray">Add Short Answer</button>
+        <button mat-raised-button (click)="addEssay()" class="gray">Add Essay</button><br>
+        <button mat-raised-button (click)="addRanking()" class="gray">Add Ranking</button><br>
+        <br>
+        <div *ngIf="editQuizForm.invalid">
             <p> 
                 All fields must be filled out correctly before you can preview!
             </p>
         </div> 
         <div *ngIf="editQuizForm.valid">
-                <p> 
-                    You can now preview!
-                </p>
-            </div> 
+            <p> 
+                You can now preview!
+            </p>
+        </div> 
         <button mat-raised-button [disabled] = "editQuizForm.invalid" (click)="togglePreview()" class="go">Preview</button>
-</form>
-
+    </form>
 </div>
-<div *ngIf ="isPreviewing">
-        <button mat-raised-button (click)="togglePreview()" class="go">Edit</button>
-        <button mat-raised-button (click)="submit()" class="go">Submit</button>
-    <h1><br>{{data.title}}</h1>
+<div *ngIf ="isPreviewing" class="main-content">
+    <h1>{{data.title}}</h1>
     <h4>{{data.description}}</h4>
     <div *ngFor="let question of data.questions; let i = index">
         <div [ngSwitch] = "questionTypes[i]">
@@ -253,6 +285,7 @@
                             {{question.optionFour}}
                         </mat-radio-button><br>
                     </mat-radio-group>
+                    <br>
                 </div>
             </div>
             <div *ngSwitchCase = "'True/False'">
@@ -263,6 +296,7 @@
                         <mat-radio-button value = "false">false</mat-radio-button>
                     </mat-radio-group>
                 </div>
+                <br>
             </div>
             <div *ngSwitchCase = "'Short Answer'">
                 <strong>{{i + 1}}. {{question.question}}</strong>
@@ -281,6 +315,61 @@
                     </mat-form-field>
                 </div>
             </div>
+            <div *ngSwitchCase = "'Ranking'">
+                <strong>{{i + 1}}. {{question.question}}</strong>
+                <div>                       
+                    <div>     
+                        <mat-form-field appearance="fill" class="rank">
+                            <mat-label> Rank</mat-label>
+                            <mat-select>
+                                <mat-option [value]="1">1</mat-option>
+                                <mat-option [value]="2">2</mat-option>
+                                <mat-option [value]="2">3</mat-option>
+                                <mat-option [value]="4">4</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        &nbsp;{{question.optionOne}}
+                    </div>
+                    <div>
+                        <mat-form-field appearance="fill" class="rank">
+                            <mat-label> Rank</mat-label>
+                            <mat-select>
+                                <mat-option [value]="1">1</mat-option>
+                                <mat-option [value]="2">2</mat-option>
+                                <mat-option [value]="2">3</mat-option>
+                                <mat-option [value]="4">4</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        &nbsp;{{question.optionTwo}}
+                    </div>
+                    <div>
+                        <mat-form-field appearance="fill" class="rank">
+                            <mat-label> Rank</mat-label>
+                            <mat-select>
+                                <mat-option [value]="1">1</mat-option>
+                                <mat-option [value]="2">2</mat-option>
+                                <mat-option [value]="2">3</mat-option>
+                                <mat-option [value]="4">4</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        &nbsp;{{question.optionThree}}
+                    </div>
+                    <div>
+                        <mat-form-field appearance="fill" class="rank">
+                            <mat-label> Rank</mat-label>
+                            <mat-select>
+                                <mat-option [value]="1">1</mat-option>
+                                <mat-option [value]="2">2</mat-option>
+                                <mat-option [value]="2">3</mat-option>
+                                <mat-option [value]="4">4</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        &nbsp;{{question.optionFour}}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <button mat-raised-button (click)="togglePreview()" class="gray">Edit</button>
+    <button mat-raised-button (click)="submit()" class="go">Submit</button>
 </div>

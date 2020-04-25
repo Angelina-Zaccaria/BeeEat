@@ -18,12 +18,13 @@ import { MakeQuizComponent } from './make-quiz/make-quiz.component';
 import { MakeSurveyComponent } from './make-survey/make-survey.component';
 import { PreviewComponent } from './preview/preview.component';
 import { SuccessComponent } from './success/success.component';
-import {ClipboardModule} from '@angular/cdk/clipboard';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { EditComponent } from './edit/edit.component';
 import { TakeSurveyComponent } from './take-survey/take-survey.component';
 import { TakeQuizComponent } from './take-quiz/take-quiz.component';
 import { EditSurveyComponent } from './edit-survey/edit-survey.component';
 import { EditQuizComponent } from './edit-quiz/edit-quiz.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { EditQuizComponent } from './edit-quiz/edit-quiz.component';
     ReactiveFormsModule, 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, 
-    ClipboardModule
+    ClipboardModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

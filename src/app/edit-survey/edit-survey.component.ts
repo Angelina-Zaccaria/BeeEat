@@ -67,6 +67,17 @@ export class EditSurveyComponent implements OnInit {
         this.questionTypes.push('Essay')
         this.questionForms.push(essay)
       }
+      else if(this.data.questions[i].type == 'Ranking'){
+          const ranking = this.fb.group({
+            question: [this.data.questions[i].question, Validators.required],
+            optionOne: [this.data.questions[i].optionOne, Validators.required],
+            optionTwo: [this.data.questions[i].optionTwo, Validators.required],
+            optionThree: [this.data.questions[i].optionThree, Validators.required],
+            optionFour: [this.data.questions[i].optionFour, Validators.required],
+          })
+          this.questionTypes.push('Ranking')
+          this.questionForms.push(ranking)
+      }
     }
   }
 
@@ -109,6 +120,18 @@ export class EditSurveyComponent implements OnInit {
     this.questionTypes.push('Essay')
     this.questionForms.push(essay)
     // this.questions.push({ type: "Short Answer" });
+  }
+
+  addRanking() {
+    const ranking = this.fb.group({
+      question: ['', Validators.required],
+      optionOne: ['', Validators.required],
+      optionTwo: ['', Validators.required],
+      optionThree: ['', Validators.required],
+      optionFour: ['', Validators.required],
+    })
+    this.questionTypes.push('Ranking')
+    this.questionForms.push(ranking)
   }
 
   deleteQuestion(i){

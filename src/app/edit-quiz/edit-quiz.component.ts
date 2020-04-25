@@ -98,6 +98,27 @@ export class EditQuizComponent implements OnInit {
         this.questionTypes.push('Essay')
         this.questionForms.push(essay)
       }
+      else if(this.data.questions[i].type === 'Ranking'){
+        const ranking = this.fb.group({
+          question: [this.data.questions[i].question, Validators.required],
+          optionOne: [this.data.questions[i].optionOne, Validators.required],
+          rankOne: [this.data.questions[i].rankOne, Validators.required],
+          optionTwo: [this.data.questions[i].optionTwo, Validators.required],
+          rankTwo: [this.data.questions[i].rankTwo, Validators.required,],
+          optionThree: [this.data.questions[i].optionThree, Validators.required],
+          rankThree: [this.data.questions[i].rankThree, Validators.required],
+          optionFour: [this.data.questions[i].optionFour, Validators.required],
+          rankFour: [this.data.questions[i].rankFour, Validators.required],
+          value: [this.data.questions[i].value, [
+            Validators.required,
+            Validators.min(0),
+            Validators.pattern('[0-9]*')
+          ]]
+        })
+    
+        this.questionTypes.push('Ranking')
+        this.questionForms.push(ranking)
+      }
     }
   }
 
@@ -173,6 +194,28 @@ export class EditQuizComponent implements OnInit {
     this.questionTypes.push('Essay')
     this.questionForms.push(essay)
     // this.questions.push({ type: "Short Answer" });
+  }
+
+  addRanking() {
+    const ranking = this.fb.group({
+      question: ['', Validators.required],
+      optionOne: ['', Validators.required],
+      rankOne: ['', Validators.required],
+      optionTwo: ['', Validators.required],
+      rankTwo: [null, Validators.required,],
+      optionThree: ['', Validators.required],
+      rankThree: [null, Validators.required],
+      optionFour: ['', Validators.required],
+      rankFour: [null, Validators.required],
+      value: [null, [
+        Validators.required,
+        Validators.min(0),
+        Validators.pattern('[0-9]*')
+      ]]
+    })
+
+    this.questionTypes.push('Ranking')
+    this.questionForms.push(ranking)
   }
 
   deleteQuestion(i){
