@@ -3,10 +3,6 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { DbService } from '../services/db.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, } from 'rxjs/internal/Observable';
-import { QuestionsComponent } from '../questions/questions.component';
-// class Quiz {
-//   constructor(public title) { }
-// }
 
 @Component({
   selector: 'app-take-quiz',
@@ -49,7 +45,18 @@ export class TakeQuizComponent implements OnInit {
         data[`${quiz.questions[i].optionFour}`] = '';
         console.log(data);
         groupData[`${i}`] = this.fb.group(data);
-      } else {
+      }
+      else if(quiz.questions[i].type == 'Matching'){
+        console.log('hi');
+        let data = {};
+        data[`${quiz.questions[i].optionOne}`] = '';
+        data[`${quiz.questions[i].optionTwo}`] = '';
+        data[`${quiz.questions[i].optionThree}`] = '';
+        data[`${quiz.questions[i].optionFour}`] = '';
+        console.log(data);
+        groupData[`${i}`] = this.fb.group(data);
+      }
+      else {
         groupData[`${i}`] = '';
       }
 
@@ -79,12 +86,21 @@ export class TakeQuizComponent implements OnInit {
       this.totalWorth += Number(this.selected.questions[i].value);
       console.log(this.selected.questions[i].answer);
       console.log(this.userInput.value[`${i}`]);
-      if(this.selected.questions[i].type === 'Ranking'){
-        if(this.userInput.value[i.toString()][this.selected.questions[i].optionOne] == this.selected.questions[i].rankOne
-        && this.userInput.value[i.toString()][this.selected.questions[i].optionTwo] == this.selected.questions[i].rankTwo
-        && this.userInput.value[i.toString()][this.selected.questions[i].optionThree] == this.selected.questions[i].rankThree
-        && this.userInput.value[i.toString()][this.selected.questions[i].optionFour] == this.selected.questions[i].rankFour){
+      if (this.selected.questions[i].type === 'Ranking') {
+        if (this.userInput.value[i.toString()][this.selected.questions[i].optionOne] == this.selected.questions[i].rankOne
+          && this.userInput.value[i.toString()][this.selected.questions[i].optionTwo] == this.selected.questions[i].rankTwo
+          && this.userInput.value[i.toString()][this.selected.questions[i].optionThree] == this.selected.questions[i].rankThree
+          && this.userInput.value[i.toString()][this.selected.questions[i].optionFour] == this.selected.questions[i].rankFour) {
           this.pointsScored += Number(this.selected.questions[i].value);
+        }
+      }
+      //ASK
+      if (this.selected.questions[i].type == 'Matching') {
+        if (this.userInput.value[i.toString()][this.selected.questions[i].optionOne] == this.selected.question[i].matchOne
+          && this.userInput.value[i.toString()][this.selected.questions[i].optionTwo] == this.selected.question[i].matchTwo
+          && this.userInput.value[i.toString()][this.selected.questions[i].optionThree] == this.selected.question[i].matchThree
+          && this.userInput.value[i.toString()][this.selected.questions[i].optionFour] == this.selected.question[i].matchFour){
+            this.pointsScored += Number(this.selected.questions[i].value);
         }
       }
       if (this.selected.questions[i].answer === this.userInput.value[`${i}`]) {
