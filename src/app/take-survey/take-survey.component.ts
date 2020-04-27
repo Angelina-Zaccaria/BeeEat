@@ -16,6 +16,8 @@ import { map, take, tap } from 'rxjs/operators';
 export class TakeSurveyComponent implements OnInit {
 
   responseCounts = {};
+  fillIn = {};
+  
 
 
   userInput: FormGroup;
@@ -35,16 +37,51 @@ export class TakeSurveyComponent implements OnInit {
     console.log()
   }
   
+  // select(survey) {
+  //   let groupData = {}
+  //   for (let i = 0; i < survey.questions.length; i++) {
+  //     // groupData[`${i}`] = ['', Validators.required];
+  //     groupData[`${i}`] = '';
+  //   }
+  //   this.userInput = this.fb.group(groupData);
+  //   // this.userInput.valueChanges.subscribe(console.log);
+  //   this.selected = survey; 
+  //   // console.log(groupData);
+  // }
+
+
   select(survey) {
     let groupData = {}
     for (let i = 0; i < survey.questions.length; i++) {
       // groupData[`${i}`] = ['', Validators.required];
-      groupData[`${i}`] = '';
+      if (survey.questions[i].type == 'Ranking') {
+        let data = {};
+        data[`${survey.questions[i].optionOne}`] = '';
+        data[`${survey.questions[i].optionTwo}`] = '';
+        data[`${survey.questions[i].optionThree}`] = '';
+        data[`${survey.questions[i].optionFour}`] = '';
+        console.log(data);
+        groupData[`${i}`] = this.fb.group(data);
+      }
+      else if(survey.questions[i].type == 'Matching'){
+        console.log('hi');
+        let data = {};
+        data[`${survey.questions[i].optionOne}`] = '';
+        data[`${survey.questions[i].optionTwo}`] = '';
+        data[`${survey.questions[i].optionThree}`] = '';
+        data[`${survey.questions[i].optionFour}`] = '';
+        console.log(data);
+        groupData[`${i}`] = this.fb.group(data);
+      }
+      else {
+        groupData[`${i}`] = '';
+      }
+
     }
     this.userInput = this.fb.group(groupData);
-    // this.userInput.valueChanges.subscribe(console.log);
-    this.selected = survey; 
-    // console.log(groupData);
+    this.userInput.valueChanges.subscribe(console.log);
+    this.selected = survey;
+    console.log(groupData);
   }
 
   incrementUsers() {
@@ -76,6 +113,26 @@ export class TakeSurveyComponent implements OnInit {
     return this.selected.count;
   }
 
+  private allAnswers(surveyID, questionNumber) {
+    this.afs.collection(`survey/${surveyID}/answers`).get().subscribe(results => {
+      this.fillIn[questionNumber] = {
+        count: results.size,
+        answer: this.userInput.value[questionNumber]
+        }
+    });
+    //return this.selected.count;
+  }
+
+  allResponses() {
+    this.fillIn = {};
+    // for(let i = 0; i < this.allAnswers(this.selected.id, this.selected.question).length; i++) {
+    //   this.allAnswers(this.selected.id, i.toString());    
+    // }
+    for(let i = 0; i < 2; i++) {
+      this.allAnswers(this.selected.id, i.toString());    
+      }
+  }
+
 
   clear() {
     this.selected = null;
@@ -92,5 +149,22 @@ export class TakeSurveyComponent implements OnInit {
     this.submitClicked = !this.submitClicked;
     this.getTotalResponses();
   }
+
+  // allAnswers(surveyID, questionNumber) {
+  //   this.afs.collection(`survey/${surveyID}/answers`).get().subscribe(results => {
+  //     this.fillIn[questionNumber] = {
+  //       count: results.size
+  //       }
+  //   });
+  //   return this.selected.count;
+  // }
+
+  // allResponses() {
+  //   this.fillIn = {};
+  //   for(let i = 0; i < this.allAnswers(this.selected.id, this.selected.question).length; i++) {
+  //     return this.selected.question[i].answers;    
+  //   }
+  // }
+
 
 }
