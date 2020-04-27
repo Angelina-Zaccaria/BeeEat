@@ -90,7 +90,7 @@
                                             <mat-option [value]="4">4</mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                    &nbsp;{{question.optionTwo}}   
+                                    &nbsp;{{question.optionTwo}}
                                 </div>
                                 <div>
                                     <mat-form-field appearance="fill" class="rank">
@@ -118,10 +118,67 @@
                                 </div>
                             </div>
                         </div>
+                        <div *ngSwitchCase="'Matching'">
+                            <strong>{{i + 1}}. {{question.question}}</strong>
+                            <div [formGroupName]="i.toString()">
+                                <div>
+                                    <mat-form-field appearance="fill" class="match">
+                                        <mat-label>Match</mat-label>
+                                        <mat-select [formControlName]="question.optionOne">
+                                            <mat-option value="a">a. {{question.matchA}}</mat-option>
+                                            <mat-option value="b">b. {{question.matchB}}</mat-option>
+                                            <mat-option value="c">c. {{question.matchC}}</mat-option>
+                                            <mat-option value="d">d. {{question.matchD}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    &nbsp;{{question.optionOne}}
+                                    <br>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="fill" class="match">
+                                        <mat-label>Match</mat-label>
+                                        <mat-select [formControlName]="question.optionTwo">
+                                            <mat-option value="a">a. {{question.matchA}}</mat-option>
+                                            <mat-option value="b">b. {{question.matchB}}</mat-option>
+                                            <mat-option value="c">c. {{question.matchC}}</mat-option>
+                                            <mat-option value="d">d. {{question.matchD}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    &nbsp;{{question.optionTwo}}
+                                    <br>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="fill" class="match">
+                                        <mat-label>Match</mat-label>
+                                        <mat-select [formControlName]="question.optionThree">
+                                            <mat-option value="a">a. {{question.matchA}}</mat-option>
+                                            <mat-option value="b">b. {{question.matchB}}</mat-option>
+                                            <mat-option value="c">c. {{question.matchC}}</mat-option>
+                                            <mat-option value="d">d. {{question.matchD}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    &nbsp;{{question.optionThree}}
+                                    <br>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="fill" class="match">
+                                        <mat-label>Match</mat-label>
+                                        <mat-select [formControlName]="question.optionFour">
+                                            <mat-option value="a">a. {{question.matchA}}</mat-option>
+                                            <mat-option value="b">b. {{question.matchB}}</mat-option>
+                                            <mat-option value="c">c. {{question.matchC}}</mat-option>
+                                            <mat-option value="d">d. {{question.matchD}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    &nbsp;{{question.optionFour}}
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
-            <button mat-raised-button (click)="submit(); incrementUsers();" class="go"> Submit</button>
+            <button mat-raised-button (click)="submit(); incrementUsers();" class="go">Submit</button>
         </div>
         <div *ngIf="submitClicked">
             <h1>Thank you for participating in our survey! See below for how many people have the same response as you!
@@ -129,17 +186,18 @@
             <h1>{{selected.title}}</h1>
             <p>{{selected.description}}</p>
             <div *ngFor="let question of selected.questions; let i = index; ">
-                 switch on type
+                <!-- switch on type -->
                 <div [ngSwitch]="question.type">
                     <div *ngSwitchCase="'Multiple Choice'">
                         <strong>{{i + 1}}. {{question.question}}</strong>
                         <div>
                             <br>
                             Your Response: {{userInput.value[i.toString()]}}<br>
-                            
-                               <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
-                                    This many people had the same response as you: {{responseCounts[i.toString()].count}} / {{totalUsers()}}<br>
-                               </span>
+
+                            <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
+                                This many people had the same response as you: {{responseCounts[i.toString()].count}} /
+                                {{totalUsers()}}<br>
+                            </span>
                             <br>
                         </div>
                     </div>
@@ -148,10 +206,11 @@
                         <div>
                             <br>
                             Your Response: {{userInput.value[i.toString()]}}<br>
-                            
-                                <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
-                                    This many people had the same response as you: {{responseCounts[i.toString()].count}} / {{totalUsers()}}<br>
-                                </span>
+
+                            <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
+                                This many people had the same response as you: {{responseCounts[i.toString()].count}} /
+                                {{totalUsers()}}<br>
+                            </span>
                             <br>
                         </div>
                     </div>
@@ -160,10 +219,10 @@
                         <div>
                             <br>
                             Your Response: {{userInput.value[i.toString()]}}<br>
-                            <!-- <span *ngIf="totalResponse(selected.id, i, userInput.value[i.toString()] | async as count">
-                                This many people had the same response as you: {{(count / totalUsers()) | percent}}<br>
-                            </span> -->
-                            Other User Answers were: {{fillIn[i.toString()]}}<br>
+                            Other User Responses Were:<br>
+                            <ng-container *ngFor="let response of fillIn[i.toString()]; let j = index">
+                                {{j + 1}}) {{response[j] | json}}<br>
+                            </ng-container>
                         </div>
                         <br>
                     </div>
@@ -172,9 +231,10 @@
                         <div>
                             <br>
                             Your Response {{userInput.value[i.toString()]}}<br>
-                            <!-- <span *ngIf="totalResponse(selected.id, i, userInput.value[i.toString()] | async as count">
-                                This many people had the same response as you: {{(count / totalUsers()) | percent}}<br>
-                            </span> -->
+                            Other User Responses Were:<br>
+                            <ng-container *ngFor="let response of fillIn[i.toString()]; let j = index">
+                                {{j + 1}}) {{response[j] | json}}<br>
+                            </ng-container>
                         </div>
                         <br>
                     </div>
@@ -182,33 +242,46 @@
                         <strong>{{i + 1}}. {{question.question}}</strong>
                         <div>
                             <br>
-                            Your Answer: {{selected.questions[i].optionOne}}-
+                            Your Answer: <br>
+                            {{selected.questions[i].optionOne}}: 
                             {{userInput.value[i.toString()][selected.questions[i].optionOne] | json}}<br>
-                            <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
-                                This many people had the same response as you: {{responseCounts[i.toString()].count}} / {{totalUsers()}}<br>
-                            </span>
-
-                            Your Answer: {{selected.questions[i].optionTwo}}-
+                            {{selected.questions[i].optionTwo}}: 
                             {{userInput.value[i.toString()][selected.questions[i].optionTwo] | json}}<br>
-                            <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
-                                This many people had the same response as you: {{responseCounts[i.toString()].count}} / {{totalUsers()}}<br>
-                            </span>
-
-                            Your Answer: {{selected.questions[i].optionThree}}-
+                            {{selected.questions[i].optionThree}}: 
                             {{userInput.value[i.toString()][selected.questions[i].optionThree] | json}}<br>
-                            <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
-                                This many people had the same response as you: {{responseCounts[i.toString()].count}} / {{totalUsers()}}<br>
-                            </span>
-
-                            Your Answer: {{selected.questions[i].optionFour}}-
+                            {{selected.questions[i].optionFour}}: 
                             {{userInput.value[i.toString()][selected.questions[i].optionFour] | json}}<br>
                             <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
-                                This many people had the same response as you: {{responseCounts[i.toString()].count}} / {{totalUsers()}}<br>
+                                This many people had the same response as you: {{responseCounts[i.toString()].count}} /
+                                {{totalUsers()}}<br>
                             </span>
                             <br>
                         </div>
                         <br>
                     </div>
+                    <div *ngSwitchCase="'Matching'">
+                        <strong>{{i + 1}}. {{question.question}}</strong>
+                        <div>
+                            Matches:<br>
+                            a. {{question.matchA}}<br>
+                            b. {{question.matchB}}<br>
+                            c. {{question.matchC}}<br>
+                            d. {{question.matchD}}<br>
+                            Your Answer: <br>
+                            {{selected.questions[i].optionOne}}: 
+                            {{userInput.value[i.toString()][selected.questions[i].optionOne] | json}}<br>
+                            {{selected.questions[i].optionTwo}}: 
+                            {{userInput.value[i.toString()][selected.questions[i].optionTwo] | json}}<br>
+                            {{selected.questions[i].optionThree}}: 
+                            {{userInput.value[i.toString()][selected.questions[i].optionThree] | json}}<br>
+                            {{selected.questions[i].optionFour}}: 
+                            {{userInput.value[i.toString()][selected.questions[i].optionFour] | json}}<br>
+                            <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
+                                This many people had the same response as you: {{responseCounts[i.toString()].count}} /
+                                {{totalUsers()}}<br>
+                            </span>
+                        </div>
+                    </div>  
                 </div>
             </div>
         </div>

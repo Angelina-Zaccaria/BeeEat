@@ -16,7 +16,7 @@ import { map, take, tap } from 'rxjs/operators';
 export class TakeSurveyComponent implements OnInit {
 
   responseCounts = {};
-  fillIn = {};
+  fillIn = {}; // stores answers
   
 
 
@@ -114,23 +114,23 @@ export class TakeSurveyComponent implements OnInit {
   }
 
   private allAnswers(surveyID, questionNumber) {
-    this.afs.collection(`survey/${surveyID}/answers`).get().subscribe(results => {
-      this.fillIn[questionNumber] = {
-        count: results.size,
-        answer: this.userInput.value[questionNumber]
-        }
-    });
-    //return this.selected.count;
+    this.afs.collection(`survey/${surveyID}/answers`, ref => ref.limit(5)).get().subscribe(
+      results => {
+        this.fillIn[questionNumber] = []
+        results.docs.forEach(doc => {
+          this.fillIn[questionNumber].push(doc.data());
+        });
+      })
   }
 
   allResponses() {
     this.fillIn = {};
-    // for(let i = 0; i < this.allAnswers(this.selected.id, this.selected.question).length; i++) {
-    //   this.allAnswers(this.selected.id, i.toString());    
-    // }
-    for(let i = 0; i < 2; i++) {
+    for (let i = 0; i < Object.keys(this.userInput.value).length; i++) {
       this.allAnswers(this.selected.id, i.toString());    
-      }
+    }
+    // for(let i = 0; i < 2; i++) {
+    //   this.allAnswers(this.selected.id, i.toString());    
+    //   }
   }
 
 
@@ -148,6 +148,7 @@ export class TakeSurveyComponent implements OnInit {
     })
     this.submitClicked = !this.submitClicked;
     this.getTotalResponses();
+    this.allResponses();
   }
 
   // allAnswers(surveyID, questionNumber) {
