@@ -161,13 +161,14 @@
                             <p>{{question.type}}</p>
                             <div>
                                 <mat-form-field appearance="fill" class="fill-in">
-                                    <textarea matInput placeholder="Write Instructions Here..." formControlName="question"></textarea>
+                                    <textarea matInput placeholder="Write Instructions Here..."
+                                        formControlName="question"></textarea>
                                 </mat-form-field>
                             </div>
                             <div>
                                 <mat-form-field appearance="fill" class="rank">
                                     <mat-label>Rank</mat-label>
-                                    <mat-select formControlName = "rankOne">
+                                    <mat-select formControlName="rankOne">
                                         <mat-option [value]="1">1</mat-option>
                                         <mat-option [value]="2">2</mat-option>
                                         <mat-option [value]="2">3</mat-option>
@@ -176,12 +177,12 @@
                                 </mat-form-field>
                                 &nbsp;
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Option One..." formControlName = "optionOne">
+                                    <input matInput placeholder="Option One..." formControlName="optionOne">
                                 </mat-form-field>
                                 <br>
                                 <mat-form-field appearance="fill" class="rank">
                                     <mat-label>Rank</mat-label>
-                                    <mat-select formControlName = "rankTwo">
+                                    <mat-select formControlName="rankTwo">
                                         <mat-option [value]="1">1</mat-option>
                                         <mat-option [value]="2">2</mat-option>
                                         <mat-option [value]="2">3</mat-option>
@@ -190,12 +191,12 @@
                                 </mat-form-field>
                                 &nbsp;
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Option Two..." formControlName = "optionTwo">
+                                    <input matInput placeholder="Option Two..." formControlName="optionTwo">
                                 </mat-form-field>
                                 <br>
                                 <mat-form-field appearance="fill" class="rank">
                                     <mat-label>Rank</mat-label>
-                                    <mat-select formControlName = "rankThree">
+                                    <mat-select formControlName="rankThree">
                                         <mat-option [value]="1">1</mat-option>
                                         <mat-option [value]="2">2</mat-option>
                                         <mat-option [value]="2">3</mat-option>
@@ -204,12 +205,12 @@
                                 </mat-form-field>
                                 &nbsp;
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Option Three..." formControlName = "optionThree">
+                                    <input matInput placeholder="Option Three..." formControlName="optionThree">
                                 </mat-form-field>
                                 <br>
                                 <mat-form-field appearance="fill" class="rank">
                                     <mat-label>Rank</mat-label>
-                                    <mat-select formControlName = "rankFour">
+                                    <mat-select formControlName="rankFour">
                                         <mat-option [value]="1">1</mat-option>
                                         <mat-option [value]="2">2</mat-option>
                                         <mat-option [value]="2">3</mat-option>
@@ -218,17 +219,17 @@
                                 </mat-form-field>
                                 &nbsp;
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Option Four..." formControlName = "optionFour">
+                                    <input matInput placeholder="Option Four..." formControlName="optionFour">
                                 </mat-form-field>
                                 <br>
                             </div>
                             <div>
-                                Points: 
+                                Points:
                                 <mat-form-field appearance="fill" class="points">
-                                    <input matInput placeholder="" formControlName = "value">
+                                    <input matInput placeholder="" formControlName="value">
                                 </mat-form-field>
                                 <span *ngIf="question.controls.value.errors?.pattern">
-                                        Only positive whole numbers accepted!
+                                    Only positive whole numbers accepted!
                                 </span>
                             </div>
                             <div>
@@ -239,20 +240,21 @@
                         <div *ngSwitchCase="'Matching'">
                             <strong>Question {{i + 1}}:</strong>
                             <p>{{question.type}}</p>
-                            <div> 
+                            <div>
                                 <mat-form-field appearance="fill" class="fill-in">
-                                    <textarea matInput placeholder="Write Instructions Here..." formControlName = "question"></textarea>
+                                    <textarea matInput placeholder="Write Question Here..."
+                                        formControlName="question"></textarea>
                                 </mat-form-field>
                             </div>
                             <div>
-                                Questions:<br>
+                                Options:<br>
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Question One..." formControlName = "questionOne">
+                                    <input matInput placeholder="Option One..." formControlName="optionOne">
                                 </mat-form-field>
                                 &nbsp;
                                 <mat-form-field appearance="fill" class="match">
-                                    <mat-label>Answer</mat-label>
-                                    <mat-select formControlName = "answerOne">
+                                    <mat-label>Match</mat-label>
+                                    <mat-select formControlName="matchOne">
                                         <mat-option value="a">a</mat-option>
                                         <mat-option value="b">b</mat-option>
                                         <mat-option value="c">c</mat-option>
@@ -261,12 +263,12 @@
                                 </mat-form-field>
                                 <br>
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Question Two..." formControlName = "questionTwo">
+                                    <input matInput placeholder="Option Two..." formControlName="optionTwo">
                                 </mat-form-field>
                                 &nbsp;
                                 <mat-form-field appearance="fill" class="match">
-                                    <mat-label>Answer</mat-label>
-                                    <mat-select formControlName = "answerTwo">
+                                    <mat-label>Match</mat-label>
+                                    <mat-select formControlName="matchTwo">
                                         <mat-option value="a">a</mat-option>
                                         <mat-option value="b">b</mat-option>
                                         <mat-option value="c">c</mat-option>
@@ -275,12 +277,12 @@
                                 </mat-form-field>
                                 <br>
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Question Three..." formControlName = "questionThree">
+                                    <input matInput placeholder="Option Three..." formControlName="optionThree">
                                 </mat-form-field>
                                 &nbsp;
                                 <mat-form-field appearance="fill" class="match">
-                                    <mat-label>Answer</mat-label>
-                                    <mat-select formControlName = "answerThree">
+                                    <mat-label>Match</mat-label>
+                                    <mat-select formControlName="matchThree">
                                         <mat-option value="a">a</mat-option>
                                         <mat-option value="b">b</mat-option>
                                         <mat-option value="c">c</mat-option>
@@ -289,12 +291,12 @@
                                 </mat-form-field>
                                 <br>
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Question Four..." formControlName = "questionFour">
+                                    <input matInput placeholder="Option Four..." formControlName="optionFour">
                                 </mat-form-field>
                                 &nbsp;
                                 <mat-form-field appearance="fill" class="match">
-                                    <mat-label>Answer</mat-label>
-                                    <mat-select formControlName = "answerFour">
+                                    <mat-label>Match</mat-label>
+                                    <mat-select formControlName="matchFour">
                                         <mat-option value="a">a</mat-option>
                                         <mat-option value="b">b</mat-option>
                                         <mat-option value="c">c</mat-option>
@@ -304,31 +306,31 @@
                                 <br>
                             </div>
                             <div>
-                                Answers:<br>
+                                Matches:<br>
                                 a.&nbsp;
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Answer a..." formControlName = "answerA">
+                                    <input matInput placeholder="Match a..." formControlName="matchA">
                                 </mat-form-field><br>
                                 b.&nbsp;
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Answer b..." formControlName = "answerB">
+                                    <input matInput placeholder="match b..." formControlName="matchB">
                                 </mat-form-field><br>
                                 c.&nbsp;
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Answer c..." formControlName = "answerC">
+                                    <input matInput placeholder="match  c..." formControlName="matchC">
                                 </mat-form-field><br>
                                 d.&nbsp;
                                 <mat-form-field appearance="fill" class="input">
-                                    <input matInput placeholder="Answer d..." formControlName = "answerD">
-                                </mat-form-field> 
+                                    <input matInput placeholder="match d..." formControlName="matchD">
+                                </mat-form-field>
                             </div>
                             <div>
-                                Points: 
+                                Points:
                                 <mat-form-field appearance="fill" class="points">
-                                    <input matInput placeholder="" formControlName = "value">
+                                    <input matInput placeholder="" formControlName="value">
                                 </mat-form-field>
                                 <span *ngIf="question.controls.value.errors?.pattern">
-                                        Only positive whole numbers accepted!
+                                    Only positive whole numbers accepted!
                                 </span>
                             </div>
                             <div>
@@ -342,62 +344,63 @@
             <ng-template #noQuestions>
                 <p>Add a question to get started...</p>
             </ng-template>
-        
-        <button mat-raised-button (click)="addMultipleChoice()" class="gray">Add Multiple Choice</button>
-        <button mat-raised-button (click)="addTrueFalse()" class="gray">Add True/False</button>
-        <button mat-raised-button (click)="addShortAnswer()" class="gray">Add Short Answer</button>
-        <button mat-raised-button (click)="addEssay()" class="gray">Add Essay</button>
-        <button mat-raised-button (click)="addRanking()" class="gray">Add Ranking</button>
-        <button mat-raised-button (click)="addMatching()" class="gray">Add Matching</button><br>
-        <br>
-        <div *ngIf="quizForm.invalid">
-                <p> 
+
+            <button mat-raised-button (click)="addMultipleChoice()" class="gray">Add Multiple Choice</button>
+            <button mat-raised-button (click)="addTrueFalse()" class="gray">Add True/False</button>
+            <button mat-raised-button (click)="addShortAnswer()" class="gray">Add Short Answer</button>
+            <button mat-raised-button (click)="addEssay()" class="gray">Add Essay</button>
+            <button mat-raised-button (click)="addRanking()" class="gray">Add Ranking</button>
+            <button mat-raised-button (click)="addMatching()" class="gray">Add Matching</button><br>
+            <br>
+            <div *ngIf="quizForm.invalid">
+                <p>
                     All fields must be filled out correctly before you can preview!
                 </p>
-            </div> 
+            </div>
             <div *ngIf="quizForm.valid">
-                    <p> 
-                        You can now preview!
-                    </p>
-                </div> 
-            <button mat-raised-button [disabled] = "quizForm.invalid" (click)="togglePreview()" class="go">Preview</button>
-    </form>
+                <p>
+                    You can now preview!
+                </p>
+            </div>
+            <button mat-raised-button [disabled]="quizForm.invalid" (click)="togglePreview()"
+                class="go">Preview</button>
+        </form>
 
     </div>
-    <div *ngIf ="isPreviewing">
+    <div *ngIf="isPreviewing">
         <h1><br>{{data.title}}</h1>
         <h4>{{data.description}}</h4>
         <div *ngFor="let question of data.questions; let i = index">
-            <div [ngSwitch] = "questionTypes[i]">
-                <div *ngSwitchCase = "'Multiple Choice'">
+            <div [ngSwitch]="questionTypes[i]">
+                <div *ngSwitchCase="'Multiple Choice'">
                     <strong>{{i + 1}}. {{question.question}}</strong>
                     <div>
-                        <mat-radio-group value = question.answer>
-                            <mat-radio-button [value] = "question.value.optionOne"[checked]="false">
+                        <mat-radio-group value=question.answer>
+                            <mat-radio-button [value]="question.value.optionOne" [checked]="false">
                                 {{question.optionOne}}
                             </mat-radio-button><br>
-                            <mat-radio-button [value] = "question.value.optionTwo"[checked]="false">
+                            <mat-radio-button [value]="question.value.optionTwo" [checked]="false">
                                 {{question.optionTwo}}
                             </mat-radio-button><br>
-                            <mat-radio-button [value] = "question.value.optionThree"[checked]="false">
+                            <mat-radio-button [value]="question.value.optionThree" [checked]="false">
                                 {{question.optionThree}}
                             </mat-radio-button><br>
-                            <mat-radio-button [value] = "question.value.optionFour"[checked]="false">
+                            <mat-radio-button [value]="question.value.optionFour" [checked]="false">
                                 {{question.optionFour}}
                             </mat-radio-button><br>
                         </mat-radio-group>
                     </div>
                 </div>
-                <div *ngSwitchCase = "'True/False'">
+                <div *ngSwitchCase="'True/False'">
                     <strong>{{i + 1}}. {{question.question}}</strong>
                     <div>
-                        <mat-radio-group value = question.answer>
-                            <mat-radio-button value = "true">true</mat-radio-button><br>
-                            <mat-radio-button value = "false">false</mat-radio-button>
+                        <mat-radio-group value=question.answer>
+                            <mat-radio-button value="true">true</mat-radio-button><br>
+                            <mat-radio-button value="false">false</mat-radio-button>
                         </mat-radio-group>
                     </div>
                 </div>
-                <div *ngSwitchCase = "'Short Answer'">
+                <div *ngSwitchCase="'Short Answer'">
                     <strong>{{i + 1}}. {{question.question}}</strong>
                     <div>
                         <mat-form-field appearance="fill" class="input">
@@ -405,7 +408,7 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div *ngSwitchCase = "'Essay'">
+                <div *ngSwitchCase="'Essay'">
                     <strong>{{i + 1}}. {{question.question}}</strong>
                     <div>
                         <mat-form-field appearance="fill" class="fill-in">
@@ -470,58 +473,50 @@
                 <div *ngSwitchCase="'Matching'">
                     <strong>{{i + 1}}. {{question.question}}</strong>
                     <div>
-                        Questions:<br>
                         <mat-form-field appearance="fill" class="match">
-                            <mat-label>Answer</mat-label>
-                            <mat-select formControlName = "answerOne">
-                                <mat-option value="a">a</mat-option>
-                                <mat-option value="b">b</mat-option>
-                                <mat-option value="c">c</mat-option>
-                                <mat-option value="d">d</mat-option>
+                            <mat-label>Match</mat-label>
+                            <mat-select>
+                                <mat-option value="a">a. {{question.matchA}}</mat-option>
+                                <mat-option value="b">b. {{question.matchB}}</mat-option>
+                                <mat-option value="c">c. {{question.matchC}}</mat-option>
+                                <mat-option value="d">d. {{question.matchD}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        &nbsp;{{question.questionOne}}
+                        &nbsp;{{question.optionOne}}
                         <br>
                         <mat-form-field appearance="fill" class="match">
-                            <mat-label>Answer</mat-label>
-                            <mat-select formControlName = "answerTwo">
-                                <mat-option value="a">a</mat-option>
-                                <mat-option value="b">b</mat-option>
-                                <mat-option value="c">c</mat-option>
-                                <mat-option value="d">d</mat-option>
+                            <mat-label>Match</mat-label>
+                            <mat-select>
+                                <mat-option value="a">a. {{question.matchA}}</mat-option>
+                                <mat-option value="b">b. {{question.matchB}}</mat-option>
+                                <mat-option value="c">c. {{question.matchC}}</mat-option>
+                                <mat-option value="d">d. {{question.matchD}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        &nbsp;{{question.questionTwo}}
+                        &nbsp;{{question.optionTwo}}
                         <br>
                         <mat-form-field appearance="fill" class="match">
-                            <mat-label>Answer</mat-label>
-                            <mat-select formControlName = "answerThree">
-                                <mat-option value="a">a</mat-option>
-                                <mat-option value="b">b</mat-option>
-                                <mat-option value="c">c</mat-option>
-                                <mat-option value="d">d</mat-option>
+                            <mat-label>Match</mat-label>
+                            <mat-select>
+                                <mat-option value="a">a. {{question.matchA}}</mat-option>
+                                <mat-option value="b">b. {{question.matchB}}</mat-option>
+                                <mat-option value="c">c. {{question.matchC}}</mat-option>
+                                <mat-option value="d">d. {{question.matchD}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        &nbsp;{{question.questionThree}}
+                        &nbsp;{{question.optionThree}}
                         <br>
                         <mat-form-field appearance="fill" class="match">
-                            <mat-label>Answer</mat-label>
-                            <mat-select formControlName = "answerFour">
-                                <mat-option value="a">a</mat-option>
-                                <mat-option value="b">b</mat-option>
-                                <mat-option value="c">c</mat-option>
-                                <mat-option value="d">d</mat-option>
+                            <mat-label>Match</mat-label>
+                            <mat-select>
+                                <mat-option value="a">a. {{question.matchA}}</mat-option>
+                                <mat-option value="b">b. {{question.matchB}}</mat-option>
+                                <mat-option value="c">c. {{question.matchC}}</mat-option>
+                                <mat-option value="d">d. {{question.matchD}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        &nbsp;{{question.questionFour}}
+                        &nbsp;{{question.optionFour}}
                         <br>
-                    </div>
-                    <div>
-                        Answers:<br>
-                        a. {{question.answerA}}<br>
-                        b. {{question.answerB}}<br>
-                        c. {{question.answerC}}<br>
-                        d. {{question.answerD}}
                     </div>
                 </div>
             </div>
