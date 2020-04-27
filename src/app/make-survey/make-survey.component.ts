@@ -94,6 +94,22 @@ export class MakeSurveyComponent implements OnInit {
     this.questionForms.push(ranking)
   }
 
+  addMatching() {
+    const matching = this.fb.group({
+      question: ['', Validators.required],
+      optionOne: ['', Validators.required],
+      matchA: ['', Validators.required],
+      optionTwo: ['', Validators.required],
+      matchB: ['', Validators.required],
+      optionThree: ['', Validators.required],
+      matchC: ['', Validators.required],
+      optionFour: ['', Validators.required],
+      matchD: ['', Validators.required],
+    })
+    this.questionTypes.push('Matching')
+    this.questionForms.push(matching)
+  }
+
   deleteQuestion(i){
     this.questionForms.removeAt(i)
     this.questionTypes.splice(i, 1)
