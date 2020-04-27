@@ -313,15 +313,15 @@
                             </mat-form-field><br>
                             b.&nbsp;
                             <mat-form-field appearance="fill" class="input">
-                                <input matInput placeholder="match b..." formControlName="matchB">
+                                <input matInput placeholder="Match b..." formControlName="matchB">
                             </mat-form-field><br>
                             c.&nbsp;
                             <mat-form-field appearance="fill" class="input">
-                                <input matInput placeholder="match  c..." formControlName="matchC">
+                                <input matInput placeholder="Match  c..." formControlName="matchC">
                             </mat-form-field><br>
                             d.&nbsp;
                             <mat-form-field appearance="fill" class="input">
-                                <input matInput placeholder="match d..." formControlName="matchD">
+                                <input matInput placeholder="Match d..." formControlName="matchD">
                             </mat-form-field>
                         </div>
                         <div>
@@ -348,8 +348,9 @@
         <button mat-raised-button (click)="addMultipleChoice()" class="gray">Add Multiple Choice</button>
         <button mat-raised-button (click)="addTrueFalse()" class="gray">Add True/False</button>
         <button mat-raised-button (click)="addShortAnswer()" class="gray">Add Short Answer</button>
-        <button mat-raised-button (click)="addEssay()" class="gray">Add Essay</button><br>
-        <button mat-raised-button (click)="addRanking()" class="gray">Add Ranking</button><br>
+        <button mat-raised-button (click)="addEssay()" class="gray">Add Essay</button>
+        <button mat-raised-button (click)="addRanking()" class="gray">Add Ranking</button>
+        <button mat-raised-button (click)="addMatching()" class="gray">Add Matching</button><br>
         <br>
         <div *ngIf="editQuizForm.invalid">
             <p>
