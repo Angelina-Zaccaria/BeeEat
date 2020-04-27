@@ -17,7 +17,7 @@ export class EditSurveyComponent implements OnInit {
   isPreviewing: boolean = false;
 
   constructor(private fb: FormBuilder, private db: DbService) {
-   }
+  }
 
   ngOnInit(): void {
     this.editSurveyForm = this.fb.group({
@@ -34,8 +34,8 @@ export class EditSurveyComponent implements OnInit {
   }
 
   addQuestions() {
-    for(var i = 0; i < this.data.questions.length; i++){
-      if(this.data.questions[i].type == 'Multiple Choice'){
+    for (var i = 0; i < this.data.questions.length; i++) {
+      if (this.data.questions[i].type == 'Multiple Choice') {
         const multipleChoice = this.fb.group({
           question: [this.data.questions[i].question, Validators.required],
           optionOne: [this.data.questions[i].optionOne, Validators.required],
@@ -46,37 +46,52 @@ export class EditSurveyComponent implements OnInit {
         this.questionTypes.push('Multiple Choice')
         this.questionForms.push(multipleChoice)
       }
-      else if(this.data.questions[i].type == 'True/False'){
+      else if (this.data.questions[i].type == 'True/False') {
         const trueFalse = this.fb.group({
           question: [this.data.questions[i].question, Validators.required]
         })
         this.questionTypes.push('True/False')
         this.questionForms.push(trueFalse)
       }
-      else if(this.data.questions[i].type == 'Short Answer'){
+      else if (this.data.questions[i].type == 'Short Answer') {
         const shortAnswer = this.fb.group({
           question: [this.data.questions[i].question, Validators.required]
         })
         this.questionTypes.push('Short Answer')
         this.questionForms.push(shortAnswer)
       }
-      else if(this.data.questions[i].type == 'Essay'){
+      else if (this.data.questions[i].type == 'Essay') {
         const essay = this.fb.group({
           question: [this.data.questions[i].question, Validators.required]
         })
         this.questionTypes.push('Essay')
         this.questionForms.push(essay)
       }
-      else if(this.data.questions[i].type == 'Ranking'){
-          const ranking = this.fb.group({
-            question: [this.data.questions[i].question, Validators.required],
-            optionOne: [this.data.questions[i].optionOne, Validators.required],
-            optionTwo: [this.data.questions[i].optionTwo, Validators.required],
-            optionThree: [this.data.questions[i].optionThree, Validators.required],
-            optionFour: [this.data.questions[i].optionFour, Validators.required],
-          })
-          this.questionTypes.push('Ranking')
-          this.questionForms.push(ranking)
+      else if (this.data.questions[i].type == 'Ranking') {
+        const ranking = this.fb.group({
+          question: [this.data.questions[i].question, Validators.required],
+          optionOne: [this.data.questions[i].optionOne, Validators.required],
+          optionTwo: [this.data.questions[i].optionTwo, Validators.required],
+          optionThree: [this.data.questions[i].optionThree, Validators.required],
+          optionFour: [this.data.questions[i].optionFour, Validators.required],
+        })
+        this.questionTypes.push('Ranking')
+        this.questionForms.push(ranking)
+      }
+      else if (this.data.questions[i].type == 'Matching') {
+        const matching = this.fb.group({
+          question: [this.data.questions[i].question, Validators.required],
+          optionOne: [this.data.questions[i].optionOne, Validators.required],
+          matchA: [this.data.questions[i].matchA, Validators.required],
+          optionTwo: [this.data.questions[i].optionTwo, Validators.required],
+          matchB: [this.data.questions[i].matchB, Validators.required],
+          optionThree: [this.data.questions[i].optionThree, Validators.required],
+          matchC: [this.data.questions[i].matchC, Validators.required],
+          optionFour: [this.data.questions[i].optionFour, Validators.required],
+          matchD: [this.data.questions[i].matchD, Validators.required],
+        })
+        this.questionTypes.push('Matching')
+        this.questionForms.push(matching)
       }
     }
   }
@@ -134,7 +149,23 @@ export class EditSurveyComponent implements OnInit {
     this.questionForms.push(ranking)
   }
 
-  deleteQuestion(i){
+  addMatching() {
+    const matching = this.fb.group({
+      question: ['', Validators.required],
+      optionOne: ['', Validators.required],
+      matchA: ['', Validators.required],
+      optionTwo: ['', Validators.required],
+      matchB: ['', Validators.required],
+      optionThree: ['', Validators.required],
+      matchC: ['', Validators.required],
+      optionFour: ['', Validators.required],
+      matchD: ['', Validators.required],
+    })
+    this.questionTypes.push('Matching')
+    this.questionForms.push(matching)
+  }
+
+  deleteQuestion(i) {
     this.questionForms.removeAt(i)
     this.questionTypes.splice(i, 1)
   }

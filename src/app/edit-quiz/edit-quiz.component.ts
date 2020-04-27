@@ -33,8 +33,8 @@ export class EditQuizComponent implements OnInit {
   }
 
   addQuestions() {
-    for(var i = 0; i < this.data.questions.length; i++){
-      if(this.data.questions[i].type == 'Multiple Choice'){
+    for (var i = 0; i < this.data.questions.length; i++) {
+      if (this.data.questions[i].type == 'Multiple Choice') {
         const multipleChoice = this.fb.group({
           question: [this.data.questions[i].question, Validators.required],
           optionOne: [this.data.questions[i].optionOne, Validators.required],
@@ -51,7 +51,7 @@ export class EditQuizComponent implements OnInit {
         this.questionTypes.push('Multiple Choice')
         this.questionForms.push(multipleChoice)
       }
-      else if(this.data.questions[i].type == 'True/False'){
+      else if (this.data.questions[i].type == 'True/False') {
         const trueFalse = this.fb.group({
           question: [this.data.questions[i].question, Validators.required],
           answer: [this.data.questions[i].answer, Validators.required],
@@ -64,7 +64,7 @@ export class EditQuizComponent implements OnInit {
         this.questionTypes.push('True/False')
         this.questionForms.push(trueFalse)
       }
-      else if(this.data.questions[i].type == 'Short Answer'){
+      else if (this.data.questions[i].type == 'Short Answer') {
         const shortAnswer = this.fb.group({
           question: [this.data.questions[i].question, Validators.required],
           answer: [this.data.questions[i].answer, [
@@ -81,7 +81,7 @@ export class EditQuizComponent implements OnInit {
         this.questionTypes.push('Short Answer')
         this.questionForms.push(shortAnswer)
       }
-      else if(this.data.questions[i].type == 'Essay'){
+      else if (this.data.questions[i].type == 'Essay') {
         const essay = this.fb.group({
           question: [this.data.questions[i].question, Validators.required],
           answer: [this.data.questions[i].answer, [
@@ -98,7 +98,7 @@ export class EditQuizComponent implements OnInit {
         this.questionTypes.push('Essay')
         this.questionForms.push(essay)
       }
-      else if(this.data.questions[i].type === 'Ranking'){
+      else if (this.data.questions[i].type == 'Ranking') {
         const ranking = this.fb.group({
           question: [this.data.questions[i].question, Validators.required],
           optionOne: [this.data.questions[i].optionOne, Validators.required],
@@ -115,12 +115,38 @@ export class EditQuizComponent implements OnInit {
             Validators.pattern('[0-9]*')
           ]]
         })
-    
+
         this.questionTypes.push('Ranking')
         this.questionForms.push(ranking)
       }
+      else if (this.data.questions[i].type == 'Matching') {
+        const matching = this.fb.group({
+          question: [this.data.questions[i].question, Validators.required],
+          optionOne: [this.data.questions[i].optionOne, Validators.required],
+          matchOne: [this.data.questions[i].matchOne, Validators.required],
+          optionTwo: [this.data.questions[i].optionTwo, Validators.required],
+          matchTwo: [this.data.questions[i].matchTwo, Validators.required,],
+          optionThree: [this.data.questions[i].optionThree, Validators.required],
+          matchThree: [this.data.questions[i].matchThree, Validators.required],
+          optionFour: [this.data.questions[i].optionFour, Validators.required],
+          matchFour: [this.data.questions[i].matchFour, Validators.required],
+          matchA: [this.data.questions[i].matchA, Validators.required],
+          matchB: [this.data.questions[i].matchB, Validators.required],
+          matchC: [this.data.questions[i].matchC, Validators.required],
+          matchD: [this.data.questions[i].matchD, Validators.required],
+          value: [this.data.questions[i].value, [
+            Validators.required,
+            Validators.min(0),
+            Validators.pattern('[0-9]*')
+          ]]
+        })
+
+        this.questionTypes.push('Matching')
+        this.questionForms.push(matching)
+      }
     }
   }
+
 
   addMultipleChoice() {
     // this.questions.push({ type: "Multiple Choice" });
@@ -218,7 +244,33 @@ export class EditQuizComponent implements OnInit {
     this.questionForms.push(ranking)
   }
 
-  deleteQuestion(i){
+  addMatching() {
+    const matching = this.fb.group({
+      question: ['', Validators.required],
+      optionOne: ['', Validators.required],
+      matchOne: ['', Validators.required],
+      optionTwo: ['', Validators.required],
+      matchTwo: ['', Validators.required,],
+      optionThree: ['', Validators.required],
+      matchThree: ['', Validators.required],
+      optionFour: ['', Validators.required],
+      matchFour: ['', Validators.required],
+      matchA: ['', Validators.required],
+      matchB: ['', Validators.required],
+      matchC: ['', Validators.required],
+      matchD: ['', Validators.required],
+      value: [null, [
+        Validators.required,
+        Validators.min(0),
+        Validators.pattern('[0-9]*')
+      ]]
+    })
+
+    this.questionTypes.push('Matching')
+    this.questionForms.push(matching)
+  }
+
+  deleteQuestion(i) {
     this.questionForms.removeAt(i)
     this.questionTypes.splice(i, 1)
   }
