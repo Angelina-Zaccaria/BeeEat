@@ -6,7 +6,9 @@
 // $candy-app-warn:    mat-palette($mat-red);
 // $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
 
-html, body { height: 100%; }
+@import url('https://fonts.googleapis.com/css2?family=Damion&display=swap');
+html, h1 {font-family: 'Damion', cursive;}
+html, body { height: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .main-content {

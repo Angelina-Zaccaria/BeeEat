@@ -49,9 +49,9 @@ import { MatSelectModule } from '@angular/material/select';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule, 
+    AngularFirestoreModule,
     ClipboardModule,
     MatSelectModule
   ],
