@@ -124,7 +124,7 @@
                                     </mat-form-field>
                                     &nbsp;{{question.optionOne}}
                                     <br>
-                                </div>  
+                                </div>
                                 <div>
                                     <mat-form-field appearance="fill" class="match">
                                         <mat-label>Match</mat-label>
@@ -137,7 +137,7 @@
                                     </mat-form-field>
                                     &nbsp;{{question.optionTwo}}
                                     <br>
-                                </div>  
+                                </div>
                                 <div>
                                     <mat-form-field appearance="fill" class="match">
                                         <mat-label>Match</mat-label>
@@ -150,7 +150,7 @@
                                     </mat-form-field>
                                     &nbsp;{{question.optionThree}}
                                     <br>
-                                </div>  
+                                </div>
                                 <div>
                                     <mat-form-field appearance="fill" class="match">
                                         <mat-label>Match</mat-label>
@@ -163,7 +163,7 @@
                                     </mat-form-field>
                                     &nbsp;{{question.optionFour}}
                                     <br>
-                                </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -250,24 +250,24 @@
                         <strong>{{i + 1}}. {{question.question}}</strong>
                         <div>
                             <br>
-                            Your Answer: {{selected.questions[i].optionOne}}-
+                            Your Answer: {{selected.questions[i].optionOne}} -
                             {{userInput.value[i.toString()][selected.questions[i].optionOne] | json}}<br>
-                            Correct Answer: {{selected.questions[i].optionOne}}-
+                            Correct Answer: {{selected.questions[i].optionOne}} -
                             {{selected.questions[i].rankOne}}<br>
 
-                            Your Answer: {{selected.questions[i].optionTwo}}-
+                            Your Answer: {{selected.questions[i].optionTwo}} -
                             {{userInput.value[i.toString()][selected.questions[i].optionTwo] | json}}<br>
-                            Correct Answer: {{selected.questions[i].optionTwo}}-
+                            Correct Answer: {{selected.questions[i].optionTwo}} -
                             {{selected.questions[i].rankTwo}}<br>
 
-                            Your Answer: {{selected.questions[i].optionThree}}-
+                            Your Answer: {{selected.questions[i].optionThree}} -
                             {{userInput.value[i.toString()][selected.questions[i].optionThree] | json}}<br>
-                            Correct Answer: {{selected.questions[i].optionThree}}-
+                            Correct Answer: {{selected.questions[i].optionThree}} -
                             {{selected.questions[i].rankThree}}<br>
 
-                            Your Answer: {{selected.questions[i].optionFour}}-
+                            Your Answer: {{selected.questions[i].optionFour}} -
                             {{userInput.value[i.toString()][selected.questions[i].optionFour] | json}}<br>
-                            Correct Answer: {{selected.questions[i].optionFour}}-
+                            Correct Answer: {{selected.questions[i].optionFour}} -
                             {{selected.questions[i].rankFour}}<br>
 
                             Points: {{question.value}} <br>
@@ -277,17 +277,40 @@
                         <br>
                     </div>
                     <div *ngSwitchCase="'Matching'">
-
+                        <strong>{{i + 1}}. {{question.question}}</strong>
+                        <div>
+                            Matches:
+                            a. {{question.matchA}}<br>
+                            b. {{question.matchB}}<br>
+                            c. {{question.matchC}}<br>
+                            d. {{question.matchD}}<br>
+                            Options:<br>
+                            Your Answer: {{selected.questions[i].optionOne}} -
+                            {{userInput.value[i.toString()][selected.questions[i].optionOne] | json}}<br>
+                            
+                            Correct Answer: {{selected.questions[i].optionOne}} -
+                            {{selected.questions[i].matchOne}}<br>
+                             Your Answer: {{selected.questions[i].optionTwo}} -
+                            {{userInput.value[i.toString()][selected.questions[i].optionTwo] | json}}<br>
+                            Correct Answer: {{selected.questions[i].optionTwo}} -
+                            {{selected.questions[i].matchTwo}}<br>
+                            Your Answer: {{selected.questions[i].optionThree}} -
+                            {{userInput.value[i.toString()][selected.questions[i].optionThree] | json}}<br>
+                            Correct Answer: {{selected.questions[i].optionThree}} -
+                            {{selected.questions[i].matchThree}}<br>
+                            Your Answer: {{selected.questions[i].optionFour}} -
+                            {{userInput.value[i.toString()][selected.questions[i].optionFour] | json}}<br>
+                            Correct Answer: {{selected.questions[i].optionFour}} -
+                            {{selected.questions[i].matchFour}}<br>
+                        </div>
                     </div>
                 </div>
-                <!-- <mat-form-field>
-                        <input matInput [formControl]="i">
-                    </mat-form-field> -->
             </div>
             <div>
+                <br>
                 Points Earned: {{pointsScored}}<br>
                 Total Points: {{totalWorth}}<br>
-                Your Score: {{totalScore}}%<br>
+                Your Score: {{totalScore | percent}}<br>
             </div>
         </div>
     </ng-template>

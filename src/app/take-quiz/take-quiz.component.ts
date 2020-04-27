@@ -96,10 +96,10 @@ export class TakeQuizComponent implements OnInit {
       }
       //ASK
       if (this.selected.questions[i].type == 'Matching') {
-        if (this.userInput.value[i.toString()][this.selected.questions[i].optionOne] == this.selected.question[i].matchOne
-          && this.userInput.value[i.toString()][this.selected.questions[i].optionTwo] == this.selected.question[i].matchTwo
-          && this.userInput.value[i.toString()][this.selected.questions[i].optionThree] == this.selected.question[i].matchThree
-          && this.userInput.value[i.toString()][this.selected.questions[i].optionFour] == this.selected.question[i].matchFour){
+        if (this.userInput.value[`${i}`][this.selected.questions[i].optionOne] == this.selected.questions[i].matchOne
+          && this.userInput.value[`${i}`][this.selected.questions[i].optionTwo] == this.selected.questions[i].matchTwo
+          && this.userInput.value[`${i}`][this.selected.questions[i].optionThree] == this.selected.questions[i].matchThree
+          && this.userInput.value[`${i}`][this.selected.questions[i].optionFour] == this.selected.questions[i].matchFour){
             this.pointsScored += Number(this.selected.questions[i].value);
         }
       }
