@@ -16,9 +16,7 @@ import { map, take, tap } from 'rxjs/operators';
 export class TakeSurveyComponent implements OnInit {
 
   responseCounts = {};
-  fillIn = {}; // stores answers
-  
-
+  fillIn = []; // stores answers
 
   userInput: FormGroup;
   public surveyList$: Observable<any[]>;
@@ -88,7 +86,7 @@ export class TakeSurveyComponent implements OnInit {
     const db = firestore();
     const increment = firestore.FieldValue.increment(1);
 
-    const survey = db.collection('survey').doc(`${this.selected.id}`)
+    const survey = db.collection('survey').doc(`${this.selected.id}`);
 
     survey.update({count: increment});
   }
@@ -110,28 +108,32 @@ export class TakeSurveyComponent implements OnInit {
   }
 
   totalUsers() {
-    return this.selected.count;
+    if (this.selected.count == null) {
+      return "0";
+    }
+    else {
+      return this.selected.count;
+    }
   }
 
-  private allAnswers(surveyID, questionNumber) {
+  private allAnswers(surveyID) {
     this.afs.collection(`survey/${surveyID}/answers`, ref => ref.limit(5)).get().subscribe(
       results => {
-        this.fillIn[questionNumber] = []
         results.docs.forEach(doc => {
-          this.fillIn[questionNumber].push(doc.data());
+         this.fillIn.push(doc.data());
         });
       })
   }
 
-  allResponses() {
-    this.fillIn = {};
-    for (let i = 0; i < Object.keys(this.userInput.value).length; i++) {
-      this.allAnswers(this.selected.id, i.toString());    
-    }
+  // allResponses() {
+  //   this.fillIn = {};
+  //   for (let i = 0; i < Object.keys(this.userInput.value).length; i++) {
+  //     this.allAnswers(this.selected.id, i.toString());    
+  //   }
     // for(let i = 0; i < 2; i++) {
     //   this.allAnswers(this.selected.id, i.toString());    
     //   }
-  }
+  // }
 
 
   clear() {
@@ -148,7 +150,11 @@ export class TakeSurveyComponent implements OnInit {
     })
     this.submitClicked = !this.submitClicked;
     this.getTotalResponses();
-    this.allResponses();
+    this.allAnswers(this.selected.id);
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 
   // allAnswers(surveyID, questionNumber) {

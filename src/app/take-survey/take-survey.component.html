@@ -1,7 +1,7 @@
 <div class="main-content">
     <div *ngIf="!selected; else display">
         <div *ngFor="let survey of surveyList$ | async">
-            <div class="survey-link" (click)="select(survey)">
+            <div class="test-link" (click)="select(survey)">
                 <h3>{{survey.title}}</h3>
             </div>
         </div>
@@ -41,8 +41,8 @@
                             <strong>{{i + 1}}. {{question.question}}</strong>
                             <div>
                                 <mat-radio-group [formControlName]="i.toString()">
-                                    <mat-radio-button [value]="'true'">true</mat-radio-button><br>
-                                    <mat-radio-button [value]="'false'">false</mat-radio-button>
+                                    <mat-radio-button [value]="true">true</mat-radio-button><br>
+                                    <mat-radio-button [value]="false">false</mat-radio-button>
                                 </mat-radio-group>
                             </div>
                             <br>
@@ -74,7 +74,7 @@
                                         <mat-select [formControlName]="question.optionOne">
                                             <mat-option [value]="1">1</mat-option>
                                             <mat-option [value]="2">2</mat-option>
-                                            <mat-option [value]="2">3</mat-option>
+                                            <mat-option [value]="3">3</mat-option>
                                             <mat-option [value]="4">4</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -86,7 +86,7 @@
                                         <mat-select [formControlName]="question.optionTwo">
                                             <mat-option [value]="1">1</mat-option>
                                             <mat-option [value]="2">2</mat-option>
-                                            <mat-option [value]="2">3</mat-option>
+                                            <mat-option [value]="3">3</mat-option>
                                             <mat-option [value]="4">4</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -98,7 +98,7 @@
                                         <mat-select [formControlName]="question.optionThree">
                                             <mat-option [value]="1">1</mat-option>
                                             <mat-option [value]="2">2</mat-option>
-                                            <mat-option [value]="2">3</mat-option>
+                                            <mat-option [value]="3">3</mat-option>
                                             <mat-option [value]="4">4</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -110,7 +110,7 @@
                                         <mat-select [formControlName]="question.optionFour">
                                             <mat-option [value]="1">1</mat-option>
                                             <mat-option [value]="2">2</mat-option>
-                                            <mat-option [value]="2">3</mat-option>
+                                            <mat-option [value]="3">3</mat-option>
                                             <mat-option [value]="4">4</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -181,6 +181,9 @@
             <button mat-raised-button (click)="submit(); incrementUsers();" class="go">Submit</button>
         </div>
         <div *ngIf="submitClicked">
+            <button mat-icon-button (click)="refresh()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
             <h1>Thank you for participating in our survey! See below for how many people have the same response as you!
             </h1>
             <h1>{{selected.title}}</h1>
@@ -191,11 +194,9 @@
                     <div *ngSwitchCase="'Multiple Choice'">
                         <strong>{{i + 1}}. {{question.question}}</strong>
                         <div>
-                            <br>
                             Your Response: {{userInput.value[i.toString()]}}<br>
-
                             <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
-                                This many people had the same response as you: {{responseCounts[i.toString()].count}} /
+                                This many people had the same response as you: {{responseCounts[i.toString()].count - 1}} /
                                 {{totalUsers()}}<br>
                             </span>
                             <br>
@@ -204,11 +205,9 @@
                     <div *ngSwitchCase="'True/False'">
                         <strong>{{i + 1}}. {{question.question}}</strong>
                         <div>
-                            <br>
                             Your Response: {{userInput.value[i.toString()]}}<br>
-
                             <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
-                                This many people had the same response as you: {{responseCounts[i.toString()].count}} /
+                                This many people had the same response as you: {{responseCounts[i.toString()].count - 1}} /
                                 {{totalUsers()}}<br>
                             </span>
                             <br>
@@ -217,11 +216,10 @@
                     <div *ngSwitchCase="'Short Answer'">
                         <strong>{{i + 1}}. {{question.question}}</strong>
                         <div>
-                            <br>
                             Your Response: {{userInput.value[i.toString()]}}<br>
                             Other User Responses Were:<br>
-                            <ng-container *ngFor="let response of fillIn[i.toString()]; let j = index">
-                                {{j + 1}}) {{response[j] | json}}<br>
+                            <ng-container *ngFor="let response of fillIn; let j = index">
+                                {{j + 1}}) {{response[i] | json}}<br>
                             </ng-container>
                         </div>
                         <br>
@@ -229,11 +227,10 @@
                     <div *ngSwitchCase="'Essay'">
                         <strong>{{i + 1}}. {{question.question}}</strong>
                         <div>
-                            <br>
-                            Your Response {{userInput.value[i.toString()]}}<br>
+                            Your Response: {{userInput.value[i.toString()]}}<br>
                             Other User Responses Were:<br>
-                            <ng-container *ngFor="let response of fillIn[i.toString()]; let j = index">
-                                {{j + 1}}) {{response[j] | json}}<br>
+                            <ng-container *ngFor="let response of fillIn; let j = index">
+                                {{j + 1}}) {{response[i] | json}}<br>
                             </ng-container>
                         </div>
                         <br>
@@ -241,7 +238,6 @@
                     <div *ngSwitchCase="'Ranking'">
                         <strong>{{i + 1}}. {{question.question}}</strong>
                         <div>
-                            <br>
                             Your Answer: <br>
                             {{selected.questions[i].optionOne}}: 
                             {{userInput.value[i.toString()][selected.questions[i].optionOne] | json}}<br>
@@ -252,8 +248,8 @@
                             {{selected.questions[i].optionFour}}: 
                             {{userInput.value[i.toString()][selected.questions[i].optionFour] | json}}<br>
                             <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
-                                This many people had the same response as you: {{responseCounts[i.toString()].count}} /
-                                {{totalUsers()}}<br>
+                                This many people had the same response as you: {{responseCounts[i.toString()].count - 1}} /
+                                {{totalUsers()}}
                             </span>
                             <br>
                         </div>
@@ -266,7 +262,7 @@
                             a. {{question.matchA}}<br>
                             b. {{question.matchB}}<br>
                             c. {{question.matchC}}<br>
-                            d. {{question.matchD}}<br>
+                            d. {{question.matchD}}<br><br>
                             Your Answer: <br>
                             {{selected.questions[i].optionOne}}: 
                             {{userInput.value[i.toString()][selected.questions[i].optionOne] | json}}<br>
@@ -277,7 +273,7 @@
                             {{selected.questions[i].optionFour}}: 
                             {{userInput.value[i.toString()][selected.questions[i].optionFour] | json}}<br>
                             <span *ngIf="responseCounts[i.toString()] &&responseCounts[i.toString()].count">
-                                This many people had the same response as you: {{responseCounts[i.toString()].count}} /
+                                This many people had the same response as you: {{responseCounts[i.toString()].count - 1}} /
                                 {{totalUsers()}}<br>
                             </span>
                         </div>
