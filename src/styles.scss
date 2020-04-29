@@ -66,3 +66,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .match {
     width: 90px;
 }
+
+.padding {
+    margin-bottom: 15px;
+}
+
+.test-link:hover {
+    cursor: pointer;
+    color: #ffc642;
+}
