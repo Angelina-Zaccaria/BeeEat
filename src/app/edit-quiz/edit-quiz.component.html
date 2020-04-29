@@ -171,7 +171,7 @@
                                 <mat-select formControlName="rankOne">
                                     <mat-option [value]="1">1</mat-option>
                                     <mat-option [value]="2">2</mat-option>
-                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="3">3</mat-option>
                                     <mat-option [value]="4">4</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -185,7 +185,7 @@
                                 <mat-select formControlName="rankTwo">
                                     <mat-option [value]="1">1</mat-option>
                                     <mat-option [value]="2">2</mat-option>
-                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="3">3</mat-option>
                                     <mat-option [value]="4">4</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -199,7 +199,7 @@
                                 <mat-select formControlName="rankThree">
                                     <mat-option [value]="1">1</mat-option>
                                     <mat-option [value]="2">2</mat-option>
-                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="3">3</mat-option>
                                     <mat-option [value]="4">4</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -213,7 +213,7 @@
                                 <mat-select formControlName="rankFour">
                                     <mat-option [value]="1">1</mat-option>
                                     <mat-option [value]="2">2</mat-option>
-                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="3">3</mat-option>
                                     <mat-option [value]="4">4</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -345,13 +345,17 @@
             <p>Add a question to get started...</p>
         </ng-template>
 
-        <button mat-raised-button (click)="addMultipleChoice()" class="gray">Add Multiple Choice</button>
-        <button mat-raised-button (click)="addTrueFalse()" class="gray">Add True/False</button>
-        <button mat-raised-button (click)="addShortAnswer()" class="gray">Add Short Answer</button>
-        <button mat-raised-button (click)="addEssay()" class="gray">Add Essay</button>
-        <button mat-raised-button (click)="addRanking()" class="gray">Add Ranking</button>
-        <button mat-raised-button (click)="addMatching()" class="gray">Add Matching</button><br>
-        <br>
+        <div class="padding">
+            <button mat-raised-button (click)="addMultipleChoice()" class="gray">Add Multiple Choice</button>
+            <button mat-raised-button (click)="addTrueFalse()" class="gray">Add True/False</button>
+            <button mat-raised-button (click)="addShortAnswer()" class="gray">Add Short Answer</button>
+        </div>
+        <div class="padding">
+            <button mat-raised-button (click)="addEssay()" class="gray">Add Essay</button>
+            <button mat-raised-button (click)="addRanking()" class="gray">Add Ranking</button>
+            <button mat-raised-button (click)="addMatching()" class="gray">Add Matching</button>
+        </div>
+
         <div *ngIf="editQuizForm.invalid">
             <p>
                 All fields must be filled out correctly before you can preview!
@@ -372,7 +376,12 @@
     <div *ngFor="let question of data.questions; let i = index">
         <div [ngSwitch]="questionTypes[i]">
             <div *ngSwitchCase="'Multiple Choice'">
-                <strong>{{i + 1}}. {{question.question}}</strong>
+                <div *ngIf="(question.value==1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} point)</strong>
+                </div>
+                <div *ngIf="(question.value>1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} points)</strong>
+                </div>
                 <div>
                     <mat-radio-group value=question.answer>
                         <mat-radio-button value="1">
@@ -392,7 +401,12 @@
                 </div>
             </div>
             <div *ngSwitchCase="'True/False'">
-                <strong>{{i + 1}}. {{question.question}}</strong>
+                <div *ngIf="(question.value==1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} point)</strong>
+                </div>
+                <div *ngIf="(question.value>1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} points)</strong>
+                </div>
                 <div>
                     <mat-radio-group value=question.answer>
                         <mat-radio-button value="true">true</mat-radio-button><br>
@@ -402,7 +416,12 @@
                 <br>
             </div>
             <div *ngSwitchCase="'Short Answer'">
-                <strong>{{i + 1}}. {{question.question}}</strong>
+                <div *ngIf="(question.value==1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} point)</strong>
+                </div>
+                <div *ngIf="(question.value>1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} points)</strong>
+                </div>
                 <div>
                     <mat-form-field appearance="fill" class="input">
                         <input matInput placeholder="Answer Goes Here...">
@@ -410,7 +429,12 @@
                 </div>
             </div>
             <div *ngSwitchCase="'Essay'">
-                <strong>{{i + 1}}. {{question.question}}</strong>
+                <div *ngIf="(question.value==1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} point)</strong>
+                </div>
+                <div *ngIf="(question.value>1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} points)</strong>
+                </div>
                 <div>
                     <mat-form-field appearance="fill" class="fill-in">
                         <textarea matInput placeholder="Answer Goes Here...">
@@ -419,7 +443,12 @@
                 </div>
             </div>
             <div *ngSwitchCase="'Ranking'">
-                <strong>{{i + 1}}. {{question.question}}</strong>
+                <div *ngIf="(question.value==1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} point)</strong>
+                </div>
+                <div *ngIf="(question.value>1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} points)</strong>
+                </div>
                 <div>
                     <div>
                         <mat-form-field appearance="fill" class="rank">
@@ -427,7 +456,7 @@
                             <mat-select>
                                 <mat-option [value]="1">1</mat-option>
                                 <mat-option [value]="2">2</mat-option>
-                                <mat-option [value]="2">3</mat-option>
+                                <mat-option [value]="3">3</mat-option>
                                 <mat-option [value]="4">4</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -439,7 +468,7 @@
                             <mat-select>
                                 <mat-option [value]="1">1</mat-option>
                                 <mat-option [value]="2">2</mat-option>
-                                <mat-option [value]="2">3</mat-option>
+                                <mat-option [value]="3">3</mat-option>
                                 <mat-option [value]="4">4</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -451,7 +480,7 @@
                             <mat-select>
                                 <mat-option [value]="1">1</mat-option>
                                 <mat-option [value]="2">2</mat-option>
-                                <mat-option [value]="2">3</mat-option>
+                                <mat-option [value]="3">3</mat-option>
                                 <mat-option [value]="4">4</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -463,7 +492,7 @@
                             <mat-select>
                                 <mat-option [value]="1">1</mat-option>
                                 <mat-option [value]="2">2</mat-option>
-                                <mat-option [value]="2">3</mat-option>
+                                <mat-option [value]="3">3</mat-option>
                                 <mat-option [value]="4">4</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -472,7 +501,12 @@
                 </div>
             </div>
             <div *ngSwitchCase="'Matching'">
-                <strong>{{i + 1}}. {{question.question}}</strong>
+                <div *ngIf="(question.value==1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} point)</strong>
+                </div>
+                <div *ngIf="(question.value>1)">
+                    <strong>{{i + 1}}. {{question.question}} ({{question.value}} points)</strong>
+                </div>
                 <div>
                     <mat-form-field appearance="fill" class="match">
                         <mat-label>Match</mat-label>
