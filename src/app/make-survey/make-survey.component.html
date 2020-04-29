@@ -127,7 +127,7 @@
                                     <mat-select>
                                         <mat-option disabled [value]="1">1</mat-option>
                                         <mat-option disabled [value]="2">2</mat-option>
-                                        <mat-option disabled [value]="2">3</mat-option>
+                                        <mat-option disabled [value]="3">3</mat-option>
                                         <mat-option disabled [value]="4">4</mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -141,7 +141,7 @@
                                     <mat-select>
                                         <mat-option disabled [value]="1">1</mat-option>
                                         <mat-option disabled [value]="2">2</mat-option>
-                                        <mat-option disabled [value]="2">3</mat-option>
+                                        <mat-option disabled [value]="3">3</mat-option>
                                         <mat-option disabled [value]="4">4</mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -155,7 +155,7 @@
                                     <mat-select>
                                         <mat-option disabled [value]="1">1</mat-option>
                                         <mat-option disabled [value]="2">2</mat-option>
-                                        <mat-option disabled [value]="2">3</mat-option>
+                                        <mat-option disabled [value]="3">3</mat-option>
                                         <mat-option disabled [value]="4">4</mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -169,7 +169,7 @@
                                     <mat-select>
                                         <mat-option disabled [value]="1">1</mat-option>
                                         <mat-option disabled [value]="2">2</mat-option>
-                                        <mat-option disabled [value]="2">3</mat-option>
+                                        <mat-option disabled [value]="3">3</mat-option>
                                         <mat-option disabled [value]="4">4</mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -285,13 +285,17 @@
             <!-- </form> -->
             <!-- </form> -->
 
-            <button mat-raised-button (click)="addMultipleChoice()" class="gray">Add Multiple Choice</button>
-            <button mat-raised-button (click)="addTrueFalse()" class="gray">Add True/False</button>
-            <button mat-raised-button (click)="addShortAnswer()" class="gray">Add Short Answer</button>
-            <button mat-raised-button (click)="addEssay()" class="gray">Add Essay</button>
-            <button mat-raised-button (click)="addRanking()" class="gray">Add Ranking</button>
-            <button mat-raised-button (click)="addMatching()" class="gray">Add Matching</button>
-            <br>
+            <div class="padding">
+                <button mat-raised-button (click)="addMultipleChoice()" class="gray">Add Multiple Choice</button>
+                <button mat-raised-button (click)="addTrueFalse()" class="gray">Add True/False</button>
+                <button mat-raised-button (click)="addShortAnswer()" class="gray">Add Short Answer</button>
+            </div>
+            <div class="padding">
+                <button mat-raised-button (click)="addEssay()" class="gray">Add Essay</button>
+                <button mat-raised-button (click)="addRanking()" class="gray">Add Ranking</button>
+                <button mat-raised-button (click)="addMatching()" class="gray">Add Matching</button>
+            </div>
+
             <div *ngIf="surveyForm.invalid">
                 <p>
                     All fields must be filled out correctly before you can preview!
@@ -329,6 +333,7 @@
                             </mat-radio-button><br>
                         </mat-radio-group>
                     </div>
+                    <br>
                 </div>
                 <div *ngSwitchCase="'True/False'">
                     <strong>{{i + 1}}. {{question.question}}</strong>
@@ -338,6 +343,7 @@
                             <mat-radio-button value="false">false</mat-radio-button>
                         </mat-radio-group>
                     </div>
+                    <br>
                 </div>
                 <div *ngSwitchCase="'Short Answer'">
                     <strong>{{i + 1}}. {{question.question}}</strong>
@@ -365,7 +371,7 @@
                                 <mat-select>
                                     <mat-option [value]="1">1</mat-option>
                                     <mat-option [value]="2">2</mat-option>
-                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="3">3</mat-option>
                                     <mat-option [value]="4">4</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -377,7 +383,7 @@
                                 <mat-select>
                                     <mat-option [value]="1">1</mat-option>
                                     <mat-option [value]="2">2</mat-option>
-                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="3">3</mat-option>
                                     <mat-option [value]="4">4</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -389,7 +395,7 @@
                                 <mat-select>
                                     <mat-option [value]="1">1</mat-option>
                                     <mat-option [value]="2">2</mat-option>
-                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="3">3</mat-option>
                                     <mat-option [value]="4">4</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -401,7 +407,7 @@
                                 <mat-select>
                                     <mat-option [value]="1">1</mat-option>
                                     <mat-option [value]="2">2</mat-option>
-                                    <mat-option [value]="2">3</mat-option>
+                                    <mat-option [value]="3">3</mat-option>
                                     <mat-option [value]="4">4</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -457,7 +463,6 @@
                         &nbsp;{{question.optionFour}}
                         <br>
                     </div>
-
                 </div>
             </div>
         </div>
