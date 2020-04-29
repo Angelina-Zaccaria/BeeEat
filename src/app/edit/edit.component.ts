@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { mergeMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit',
@@ -33,19 +33,34 @@ export class EditComponent implements OnInit {
   checkID() {
     this.docId = this.EditId.value.id;
 
-    this.afs.doc(`quiz/${this.docId.trim()}`).valueChanges().subscribe(quiz => {
-      console.log(quiz);
+    forkJoin([
+      this.afs.doc(`quiz/${this.docId.trim()}`).valueChanges().pipe(take(1)),
+      this.afs.doc(`survey/${this.docId.trim()}`).valueChanges().pipe(take(1))
+    ]).subscribe(([quiz, survey]) => {
       if (quiz) {
         this.type = 'quiz';
         this.data = quiz;
+      } else if (survey) {
+        this.type = 'survey';
+        this.data = survey;
       } else {
-        this.afs.doc(`survey/${this.docId.trim()}`).valueChanges().subscribe(survey => {
-          console.log(survey)
-          this.type = 'survey';
-          this.data = survey;
-        });
+        this.type = 'not_found';
       }
-    });
+    })  
+
+    // this.afs.doc(`quiz/${this.docId.trim()}`).valueChanges().subscribe(quiz => {
+    //   // console.log(quiz);
+    //   if (quiz) {
+    //     this.type = 'quiz';
+    //     this.data = quiz;
+    //   } else {
+    //     this.afs.doc(`survey/${this.docId.trim()}`).valueChanges().subscribe(survey => {
+    //       // console.log(survey)
+    //       this.type = 'survey';
+    //       this.data = survey;
+    //     });
+    //   }
+    // });
     
   }
 }

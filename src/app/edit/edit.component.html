@@ -8,7 +8,14 @@
                         <input type="text" matInput placeholder="Enter Access Code Here" formControlName="id">
                     </mat-form-field>
                 </div>
-                <button mat-raised-button (click)="checkID()" class="go">Submit</button>
+                <div class="col-md-12">
+                    <button mat-raised-button (click)="checkID()" class="go">Submit</button>
+                </div>
+                <div class="col-md-12">
+                    <div *ngIf="type === 'not_found'">
+                        <p>Error: Invalid Access Code</p>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
@@ -24,12 +31,14 @@
         <ng-template #invalid>
             <script>alert("Invalid access code")</script>
         </ng-template> -->
-        <div *ngIf="type === 'quiz'; else survey">
-            <app-edit-quiz [data]="data" [id]="docId"></app-edit-quiz>
-        </div>
-        <ng-template #survey>
-            <app-edit-survey [data]="data" [id]="docId"></app-edit-survey>
-        </ng-template>    
+        <div [ngSwitch]="type">
+            <div *ngSwitchCase="'quiz'">
+                <app-edit-quiz [data]="data" [id]="docId"></app-edit-quiz>  
+            </div>
+            <div *ngSwitchCase="'survey'">
+                <app-edit-survey [data]="data" [id]="docId"></app-edit-survey>
+            </div>
+        </div>  
     </ng-template>
 </div>
 <br><br>
