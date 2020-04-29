@@ -86,7 +86,7 @@ export class TakeQuizComponent implements OnInit {
       this.totalWorth += Number(this.selected.questions[i].value);
       console.log(this.selected.questions[i].answer);
       console.log(this.userInput.value[`${i}`]);
-      if (this.selected.questions[i].type === 'Ranking') {
+      if (this.selected.questions[i].type == 'Ranking') {
         if (this.userInput.value[i.toString()][this.selected.questions[i].optionOne] == this.selected.questions[i].rankOne
           && this.userInput.value[i.toString()][this.selected.questions[i].optionTwo] == this.selected.questions[i].rankTwo
           && this.userInput.value[i.toString()][this.selected.questions[i].optionThree] == this.selected.questions[i].rankThree
@@ -103,12 +103,21 @@ export class TakeQuizComponent implements OnInit {
             this.pointsScored += Number(this.selected.questions[i].value);
         }
       }
-      if (this.selected.questions[i].answer === this.userInput.value[`${i}`]) {
+      if(this.selected.questions[i].type == 'True/False'){
+        if(this.selected.questions[i].answer == String(this.userInput.value[`${i}`])){
+          this.pointsScored += Number(this.selected.questions[i].value);
+        }
+      }
+      if (this.selected.questions[i].answer == this.userInput.value[`${i}`]) {
+        console.log(this.selected.questions[i].type);
         this.pointsScored += Number(this.selected.questions[i].value);
       }
     }
-    this.totalScore = this.pointsScored / this.totalWorth * 100;
+    this.totalScore = this.pointsScored / this.totalWorth;
   }
 
+  refresh(): void {
+    window.location.reload();
+  }
 
 }
