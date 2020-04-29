@@ -46,21 +46,6 @@ export class EditComponent implements OnInit {
       } else {
         this.type = 'not_found';
       }
-    })  
-
-    // this.afs.doc(`quiz/${this.docId.trim()}`).valueChanges().subscribe(quiz => {
-    //   // console.log(quiz);
-    //   if (quiz) {
-    //     this.type = 'quiz';
-    //     this.data = quiz;
-    //   } else {
-    //     this.afs.doc(`survey/${this.docId.trim()}`).valueChanges().subscribe(survey => {
-    //       // console.log(survey)
-    //       this.type = 'survey';
-    //       this.data = survey;
-    //     });
-    //   }
-    // });
-    
+    })      
   }
 }
